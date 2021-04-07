@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/myrealestate</property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.AdvertComments"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.Advertisement"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.Category"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.City"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.Estate"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.FavoriteAd"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.Message"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.ProfileComments"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.SubCategory"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.User"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.Utility"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.models.UtilityEstate"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
