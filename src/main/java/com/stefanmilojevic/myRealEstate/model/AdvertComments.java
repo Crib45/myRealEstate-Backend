@@ -1,8 +1,7 @@
-package com.stefanmilojevic.myRealEstate.models;
+package com.stefanmilojevic.myRealEstate.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

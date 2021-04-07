@@ -6,18 +6,18 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3306/myrealestate</property>
     <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.AdvertComments"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.Advertisement"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.Category"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.City"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.Estate"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.FavoriteAd"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.Message"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.ProfileComments"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.SubCategory"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.User"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.Utility"/>
-      <mapping class="com.stefanmilojevic.myRealEstate.models.UtilityEstate"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.AdvertComments"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Advertisement"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Category"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.City"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Estate"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.FavoriteAd"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Message"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.ProfileComments"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.SubCategory"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.User"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Utility"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.UtilityEstate"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 
