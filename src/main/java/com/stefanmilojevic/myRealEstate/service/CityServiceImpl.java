@@ -1,8 +1,12 @@
 package com.stefanmilojevic.myRealEstate.service;
 
+import com.stefanmilojevic.myRealEstate.model.City;
 import com.stefanmilojevic.myRealEstate.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -14,4 +18,13 @@ public class CityServiceImpl implements CityService {
         this.cityRepository = cityRepository;
     }
 
+    @Override
+    public List<City> getAll() {
+        return cityRepository.findAll();
+    }
+
+    @Override
+    public City getById(int id) {
+        return cityRepository.findCityById(id);
+    }
 }

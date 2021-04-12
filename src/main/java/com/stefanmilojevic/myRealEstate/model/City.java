@@ -76,7 +76,7 @@ public class City {
         return result;
     }
 
-    @OneToMany(mappedBy = "cityByCityId")
+    @OneToMany(mappedBy = "cityByCityId", fetch = FetchType.LAZY)
     public List<Estate> getEstatesById() {
         return estatesById;
     }
@@ -85,7 +85,7 @@ public class City {
         this.estatesById = estatesById;
     }
 
-    @OneToMany(mappedBy = "cityByCityId")
+    @OneToMany(mappedBy = "cityByCityId", fetch = FetchType.LAZY)
     public List<User> getUsersById() {
         return usersById;
     }
