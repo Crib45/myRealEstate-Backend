@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,9 +12,11 @@ public class SubCategory {
     private int id;
     private String title;
     private String description;
-    private Integer categoryId;
+    @JsonManagedReference(value = "subcategory-estate")
     private List<Estate> estatesById;
+    @JsonBackReference(value = "subcategory-category")
     private Category categoryByCategoryId;
+    @JsonManagedReference(value = "subcategory-utility")
     private List<Utility> utilitiesById;
 
     @Id
@@ -55,7 +60,6 @@ public class SubCategory {
         if (id != that.id) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
 
         return true;
     }
@@ -65,7 +69,6 @@ public class SubCategory {
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         return result;
     }
 

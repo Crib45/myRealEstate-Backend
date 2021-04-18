@@ -1,17 +1,19 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 public class Message {
     private int id;
-    private Integer sender;
-    private Integer receiver;
     private String content;
     private Byte seen;
     private Timestamp createdAt;
+    @JsonBackReference(value = "sent-messages")
     private User userBySender;
+    @JsonBackReference(value = "received-messages")
     private User userByReceiver;
 
     @Id
@@ -63,8 +65,6 @@ public class Message {
         Message message = (Message) o;
 
         if (id != message.id) return false;
-        if (sender != null ? !sender.equals(message.sender) : message.sender != null) return false;
-        if (receiver != null ? !receiver.equals(message.receiver) : message.receiver != null) return false;
         if (content != null ? !content.equals(message.content) : message.content != null) return false;
         if (seen != null ? !seen.equals(message.seen) : message.seen != null) return false;
         if (createdAt != null ? !createdAt.equals(message.createdAt) : message.createdAt != null) return false;
@@ -75,8 +75,6 @@ public class Message {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (sender != null ? sender.hashCode() : 0);
-        result = 31 * result + (receiver != null ? receiver.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (seen != null ? seen.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);

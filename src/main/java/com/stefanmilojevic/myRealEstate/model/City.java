@@ -1,5 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,7 +11,9 @@ public class City {
     private String name;
     private String description;
     private Integer population;
+    @JsonManagedReference(value = "estate-city")
     private List<Estate> estatesById;
+    @JsonManagedReference(value = "user-city")
     private List<User> usersById;
 
     @Id

@@ -1123,7 +1123,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="326" parent="286" name="description">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(16000)|0s</DataType>
     </column>
     <column id="327" parent="286" name="population">
       <Position>4</Position>
@@ -1385,13 +1385,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>5</Position>
       <DataType>decimal(10)|0s</DataType>
     </column>
-    <column id="385" parent="292" name="username">
+    <column id="385" parent="292" name="password">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="386" parent="292" name="password">
+    <column id="386" parent="292" name="username">
       <Position>7</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(45)|0s</DataType>
     </column>
     <column id="387" parent="292" name="city_id">
       <Position>8</Position>

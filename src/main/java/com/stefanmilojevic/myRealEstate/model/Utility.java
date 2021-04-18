@@ -1,14 +1,18 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 public class Utility {
     private int id;
-    private Integer subCategoryId;
     private String name;
+    @JsonBackReference(value = "subcategory-utility")
     private SubCategory subCategoryBySubCategoryId;
+    @JsonManagedReference(value = "utilityestate-utility")
     private Collection<UtilityEstate> utilityEstatesById;
 
     @Id
@@ -39,8 +43,6 @@ public class Utility {
         Utility utility = (Utility) o;
 
         if (id != utility.id) return false;
-        if (subCategoryId != null ? !subCategoryId.equals(utility.subCategoryId) : utility.subCategoryId != null)
-            return false;
         if (name != null ? !name.equals(utility.name) : utility.name != null) return false;
 
         return true;
@@ -49,7 +51,6 @@ public class Utility {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (subCategoryId != null ? subCategoryId.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }

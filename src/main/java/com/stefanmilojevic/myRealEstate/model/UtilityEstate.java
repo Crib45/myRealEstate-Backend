@@ -1,5 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,9 +9,9 @@ import javax.persistence.*;
 public class UtilityEstate {
     private int id;
     private Integer value;
-    private Integer estateId;
-    private Integer utilityId;
+    @JsonBackReference(value = "utilityEstate-estate")
     private Estate estateByEstateId;
+    @JsonBackReference(value = "utilityestate-utility")
     private Utility utilityByUtilityId;
 
     @Id
@@ -42,8 +44,6 @@ public class UtilityEstate {
 
         if (id != that.id) return false;
         if (value != null ? !value.equals(that.value) : that.value != null) return false;
-        if (estateId != null ? !estateId.equals(that.estateId) : that.estateId != null) return false;
-        if (utilityId != null ? !utilityId.equals(that.utilityId) : that.utilityId != null) return false;
 
         return true;
     }
@@ -52,8 +52,6 @@ public class UtilityEstate {
     public int hashCode() {
         int result = id;
         result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (estateId != null ? estateId.hashCode() : 0);
-        result = 31 * result + (utilityId != null ? utilityId.hashCode() : 0);
         return result;
     }
 

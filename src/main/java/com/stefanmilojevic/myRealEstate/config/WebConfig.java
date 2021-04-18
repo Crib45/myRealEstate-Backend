@@ -33,7 +33,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/user/register").permitAll()
                 .antMatchers("/city/getAll").permitAll()
 //                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //                .antMatchers("/**").permitAll();

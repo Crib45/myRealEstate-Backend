@@ -1,5 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -12,7 +14,9 @@ public class ProfileComments {
     private String comment;
     private Double grade;
     private Timestamp createdAt;
+    @JsonBackReference(value = "profile-comments-sent")
     private User userByMadeBy;
+    @JsonBackReference(value = "profile-comments-received")
     private User userByMadeFor;
 
     @Id

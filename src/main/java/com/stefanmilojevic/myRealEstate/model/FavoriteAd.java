@@ -1,5 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -7,10 +9,10 @@ import java.sql.Timestamp;
 @Table(name = "favorite_ad", schema = "myrealestate", catalog = "")
 public class FavoriteAd {
     private int id;
-    private Integer userId;
-    private Integer advertisementId;
     private Timestamp lastChecked;
+    @JsonBackReference(value = "favorite-ad-user")
     private User userByUserId;
+    @JsonBackReference(value = "favorite-advert")
     private Advertisement advertisementByAdvertisementId;
 
     @Id
@@ -42,9 +44,6 @@ public class FavoriteAd {
         FavoriteAd that = (FavoriteAd) o;
 
         if (id != that.id) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (advertisementId != null ? !advertisementId.equals(that.advertisementId) : that.advertisementId != null)
-            return false;
         if (lastChecked != null ? !lastChecked.equals(that.lastChecked) : that.lastChecked != null) return false;
 
         return true;
@@ -53,8 +52,6 @@ public class FavoriteAd {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (advertisementId != null ? advertisementId.hashCode() : 0);
         result = 31 * result + (lastChecked != null ? lastChecked.hashCode() : 0);
         return result;
     }

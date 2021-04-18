@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,15 +16,23 @@ public class User {
     private Integer phone;
     private String username;
     private String password;
-    private Integer cityId;
+//    private Integer cityId;
     private Timestamp createdAt;
+    @JsonManagedReference(value = "ad-comment-made-by")
     private List<AdvertComments> advertCommentsById;
+    @JsonManagedReference(value = "advert-made-by")
     private List<Advertisement> advertisementsById;
+    @JsonManagedReference(value = "favorite-ad-user")
     private List<FavoriteAd> favoriteAdsById;
-    private List<Message> messagesById;
-    private List<Message> messagesById_0;
+    @JsonManagedReference(value = "sent-messages")
+    private List<Message> sentMessages;
+    @JsonManagedReference(value = "received-messages")
+    private List<Message> receivedMessages;
+    @JsonManagedReference(value = "profile-comments-received")
     private List<ProfileComments> profileCommentsById;
+    @JsonManagedReference(value = "profile-comments-sent")
     private List<ProfileComments> profileCommentsById_0;
+    @JsonBackReference(value = "user-city")
     private City cityByCityId;
 
     @Id
@@ -119,7 +130,7 @@ public class User {
         if (phone != null ? !phone.equals(user.phone) : user.phone != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (cityId != null ? !cityId.equals(user.cityId) : user.cityId != null) return false;
+//        if (cityId != null ? !cityId.equals(user.cityId) : user.cityId != null) return false;
         if (createdAt != null ? !createdAt.equals(user.createdAt) : user.createdAt != null) return false;
 
         return true;
@@ -134,7 +145,7 @@ public class User {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
+//        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         return result;
     }
@@ -167,21 +178,21 @@ public class User {
     }
 
     @OneToMany(mappedBy = "userBySender")
-    public List<Message> getMessagesById() {
-        return messagesById;
+    public List<Message> getSentMessages() {
+        return sentMessages;
     }
 
-    public void setMessagesById(List<Message> messagesById) {
-        this.messagesById = messagesById;
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
     }
 
     @OneToMany(mappedBy = "userByReceiver")
-    public List<Message> getMessagesById_0() {
-        return messagesById_0;
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
     }
 
-    public void setMessagesById_0(List<Message> messagesById_0) {
-        this.messagesById_0 = messagesById_0;
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
     }
 
     @OneToMany(mappedBy = "userByMadeBy")
@@ -211,4 +222,11 @@ public class User {
     public void setCityByCityId(City cityByCityId) {
         this.cityByCityId = cityByCityId;
     }
+
+    @Override
+    public String toString() {
+        return "password="+password;
+    }
 }
+
+

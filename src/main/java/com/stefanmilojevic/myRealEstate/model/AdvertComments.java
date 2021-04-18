@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -9,13 +12,17 @@ import java.util.List;
 public class AdvertComments {
     private int id;
     private Integer madeBy;
-    private Integer advertisementId;
     private Integer quote;
     private String comment;
     private Timestamp createdAt;
+    @JsonBackReference(value = "ad-comment-made-by")
     private User userByMadeBy;
+    @JsonBackReference(value = "advert-comment")
     private Advertisement advertisementByAdvertisementId;
+    @JsonBackReference(value = "referred-quote")
     private AdvertComments advertCommentsByQuote;
+    // Replies to advert-comment
+    @JsonManagedReference(value = "referred-quote")
     private List<AdvertComments> advertCommentsById;
 
     @Id
@@ -57,8 +64,8 @@ public class AdvertComments {
 
         if (id != that.id) return false;
         if (madeBy != null ? !madeBy.equals(that.madeBy) : that.madeBy != null) return false;
-        if (advertisementId != null ? !advertisementId.equals(that.advertisementId) : that.advertisementId != null)
-            return false;
+//        if (advertisementId != null ? !advertisementId.equals(that.advertisementId) : that.advertisementId != null)
+//            return false;
         if (quote != null ? !quote.equals(that.quote) : that.quote != null) return false;
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
@@ -70,7 +77,7 @@ public class AdvertComments {
     public int hashCode() {
         int result = id;
         result = 31 * result + (madeBy != null ? madeBy.hashCode() : 0);
-        result = 31 * result + (advertisementId != null ? advertisementId.hashCode() : 0);
+//        result = 31 * result + (advertisementId != null ? advertisementId.hashCode() : 0);
         result = 31 * result + (quote != null ? quote.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);

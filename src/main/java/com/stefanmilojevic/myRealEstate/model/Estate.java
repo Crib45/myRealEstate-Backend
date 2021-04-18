@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -9,12 +12,13 @@ public class Estate {
     private int id;
     private Integer size;
     private Timestamp createdAt;
-    private Integer advertisementId;
-    private Integer cityId;
-    private Integer subCategoryId;
+    @JsonBackReference(value = "estate-advert")
     private Advertisement advertisementByAdvertisementId;
+    @JsonBackReference(value = "estate-city")
     private City cityByCityId;
+    @JsonBackReference(value = "subcategory-estate")
     private SubCategory subCategoryBySubCategoryId;
+    @JsonManagedReference(value = "utilityEstate-estate")
     private List<UtilityEstate> utilityEstatesById;
 
     @Id
@@ -58,12 +62,6 @@ public class Estate {
         if (id != estate.id) return false;
         if (size != null ? !size.equals(estate.size) : estate.size != null) return false;
         if (createdAt != null ? !createdAt.equals(estate.createdAt) : estate.createdAt != null) return false;
-        if (advertisementId != null ? !advertisementId.equals(estate.advertisementId) : estate.advertisementId != null)
-            return false;
-        if (cityId != null ? !cityId.equals(estate.cityId) : estate.cityId != null) return false;
-        if (subCategoryId != null ? !subCategoryId.equals(estate.subCategoryId) : estate.subCategoryId != null)
-            return false;
-
         return true;
     }
 
@@ -72,9 +70,6 @@ public class Estate {
         int result = id;
         result = 31 * result + (size != null ? size.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        result = 31 * result + (advertisementId != null ? advertisementId.hashCode() : 0);
-        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
-        result = 31 * result + (subCategoryId != null ? subCategoryId.hashCode() : 0);
         return result;
     }
 

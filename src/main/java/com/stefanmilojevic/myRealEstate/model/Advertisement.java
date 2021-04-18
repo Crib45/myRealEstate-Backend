@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,10 +17,13 @@ public class Advertisement {
     private Timestamp expireDate;
     private Timestamp createdAt;
     private Timestamp editedAt;
-    private Integer ownerId;
+    @JsonManagedReference(value = "advert-comment")
     private List<AdvertComments> advertCommentsById;
+    @JsonBackReference(value = "advert-made-by")
     private User userByOwnerId;
+    @JsonManagedReference(value = "estate-advert")
     private List<Estate> estatesById;
+    @JsonManagedReference(value = "favorite-advert")
     private List<FavoriteAd> favoriteAdsById;
 
     @Id
@@ -116,7 +122,7 @@ public class Advertisement {
         if (expireDate != null ? !expireDate.equals(that.expireDate) : that.expireDate != null) return false;
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
         if (editedAt != null ? !editedAt.equals(that.editedAt) : that.editedAt != null) return false;
-        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
+//        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
 
         return true;
     }
@@ -131,7 +137,7 @@ public class Advertisement {
         result = 31 * result + (expireDate != null ? expireDate.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (editedAt != null ? editedAt.hashCode() : 0);
-        result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
+//        result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
         return result;
     }
 
