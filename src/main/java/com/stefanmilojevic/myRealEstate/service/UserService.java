@@ -4,5 +4,5 @@ import com.stefanmilojevic.myRealEstate.model.User;
 
 public interface UserService {
     String createUser(User user);
-    User getByUsername(String username);
+    User getByEmail(String username);
 }

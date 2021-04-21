@@ -1,5 +1,8 @@
 package com.stefanmilojevic.myRealEstate.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,16 +19,24 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().passwordEncoder(passwordEncoder()).usersByUsernameQuery("select email, password"
-                + " from user where email=?");
+        auth
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select email, password"
+                + " from user where email=?")
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -38,7 +49,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/login").permitAll()
 //                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //                .antMatchers("/**").permitAll();
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
+//                .and().httpBasic()
+        ;
     }
 
     @Bean
@@ -58,6 +71,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
+
 
 
 }
