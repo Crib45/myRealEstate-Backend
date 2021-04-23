@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ public class Category {
     private int id;
     private String title;
     private String description;
+    @JsonBackReference(value = "category-picture")
+    private Picture pictureById;
     @JsonManagedReference(value = "subcategory-category")
     private List<SubCategory> subCategoriesById;
 
@@ -73,5 +76,16 @@ public class Category {
 
     public void setSubCategoriesById(List<SubCategory> subCategoriesById) {
         this.subCategoriesById = subCategoriesById;
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "picture_id", referencedColumnName = "id")
+    public Picture getPictureById() {
+        return pictureById;
+    }
+
+    public void setPictureById(Picture pictureById) {
+        this.pictureById = pictureById;
     }
 }
