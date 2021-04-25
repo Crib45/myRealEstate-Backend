@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -28,5 +32,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String username) {
         return userRepository.getByEmail(username);
+    }
+
+    @Override
+    public boolean comparePasswords(String password, String passwordTwo) {
+        return passwordEncoder.matches(password,passwordTwo);
     }
 }

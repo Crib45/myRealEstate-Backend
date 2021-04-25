@@ -40,7 +40,6 @@ public class UserController {
     @GetMapping("/getLoggedUser")
     public ResponseEntity<User> getLoggedUser(HttpServletRequest request){
         String email = UserUtil.getEmailFromRequest(request);
-        System.out.println(email);
         return ResponseEntity.ok(userService.getByEmail(email));
     }
 

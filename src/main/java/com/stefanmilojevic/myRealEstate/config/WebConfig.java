@@ -26,32 +26,30 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
 
+
+    private CustomAuthProvider customAuthProvider;
+
     @Autowired
-    private DataSource dataSource;
+    public void setCustomAuthProvider(CustomAuthProvider customAuthProvider) {
+        this.customAuthProvider = customAuthProvider;
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select email, password"
-                + " from user where email=?")
-                .passwordEncoder(passwordEncoder());
+        auth.authenticationProvider(customAuthProvider);
     }
 
     @Override
     protected void configure(HttpSecurity http)
             throws Exception {
-        http.csrf().disable()
+        http.csrf().disable().cors().disable()
                 .authorizeRequests()
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/city/getAll").permitAll()
                 .antMatchers("/user/login").permitAll()
-//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .antMatchers("/**").permitAll();
-//                .anyRequest().authenticated();
-//                .and().httpBasic()
-        ;
+              //  .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .anyRequest().authenticated()
+                .and().httpBasic();
     }
 
     @Bean
