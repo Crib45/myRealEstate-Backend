@@ -14,7 +14,7 @@ public class City {
     @JsonManagedReference(value = "estate-city")
     private List<Estate> estatesById;
     @JsonManagedReference(value = "user-city")
-    private List<User> usersById;
+    private List<User> users;
 
     @Id
     @Column(name = "id")
@@ -89,12 +89,12 @@ public class City {
         this.estatesById = estatesById;
     }
 
-    @OneToMany(mappedBy = "cityByCityId", fetch = FetchType.LAZY)
-    public List<User> getUsersById() {
-        return usersById;
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUsersById(List<User> usersById) {
-        this.usersById = usersById;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

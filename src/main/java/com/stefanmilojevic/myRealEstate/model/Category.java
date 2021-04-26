@@ -7,11 +7,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "category", schema = "myrealestate", catalog = "")
 public class Category {
     private int id;
     private String title;
     private String description;
-    @JsonBackReference(value = "category-picture")
+    @JsonManagedReference(value = "category-picture")
     private Picture pictureById;
     @JsonManagedReference(value = "subcategory-category")
     private List<SubCategory> subCategoriesById;

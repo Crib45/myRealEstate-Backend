@@ -27,8 +27,14 @@ public class PictureServiceImpl implements PictureService{
         picture.setContentType(file.getContentType());
         picture.setCaption("test picture");
         byte[] imgBytes = file.getBytes();
-        picture.setImgBlob(new javax.sql.rowset.serial.SerialBlob(imgBytes));
+        picture.setImgBlob(imgBytes);
+//        picture.setImgBlob(new javax.sql.rowset.serial.SerialBlob(imgBytes));
         pictureRepository.save(picture);
         return "Success";
+    }
+
+    @Override
+    public Picture getById(int id) {
+        return pictureRepository.findById(id);
     }
 }

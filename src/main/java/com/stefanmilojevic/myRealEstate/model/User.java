@@ -16,7 +16,6 @@ public class User {
     private Integer phone;
     private String username;
     private String password;
-//    private Integer cityId;
     private Timestamp createdAt;
     @JsonManagedReference(value = "ad-comment-made-by")
     private List<AdvertComments> advertCommentsById;
@@ -33,7 +32,7 @@ public class User {
     @JsonManagedReference(value = "profile-comments-sent")
     private List<ProfileComments> profileCommentsById_0;
     @JsonBackReference(value = "user-city")
-    private City cityByCityId;
+    private City city;
 
     @Id
     @Column(name = "id")
@@ -215,12 +214,12 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
-    public City getCityByCityId() {
-        return cityByCityId;
+    public City getCity() {
+        return city;
     }
 
-    public void setCityByCityId(City cityByCityId) {
-        this.cityByCityId = cityByCityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override

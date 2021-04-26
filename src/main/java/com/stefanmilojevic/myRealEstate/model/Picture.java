@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,8 +13,8 @@ public class Picture {
     private int id;
     private String title;
     private String caption;
-    private Blob imgBlob;
-    @JsonManagedReference(value = "category-picture")
+    private byte[] imgBlob;
+    @JsonBackReference(value = "category-picture")
     private List<Category> categoryList;
     private String fileName;
     private String contentType;
@@ -70,11 +71,11 @@ public class Picture {
 
     @Lob
     @Column(name = "img_blob")
-    public Blob getImgBlob() {
+    public byte[] getImgBlob() {
         return imgBlob;
     }
 
-    public void setImgBlob(Blob imgBlob) {
+    public void setImgBlob(byte[] imgBlob) {
         this.imgBlob = imgBlob;
     }
 

@@ -18,6 +18,7 @@
       <mapping class="com.stefanmilojevic.myRealEstate.model.User"/>
       <mapping class="com.stefanmilojevic.myRealEstate.model.Utility"/>
       <mapping class="com.stefanmilojevic.myRealEstate.model.UtilityEstate"/>
+      <mapping class="com.stefanmilojevic.myRealEstate.model.Picture"/>
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 

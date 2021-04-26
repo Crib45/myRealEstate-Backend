@@ -11,10 +11,16 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    private CityService cityService;
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public  void setCityService(CityService cityService) {
+        this.cityService = cityService;
     }
 
     @Autowired
@@ -31,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByEmail(String username) {
+        User user = userRepository.getByEmail(username);
+        user.setCity(cityService.getByUser(user));
+        System.out.println(user.getCity());
         return userRepository.getByEmail(username);
     }
 

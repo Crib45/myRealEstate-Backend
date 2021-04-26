@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.model.City;
+import com.stefanmilojevic.myRealEstate.model.User;
 import com.stefanmilojevic.myRealEstate.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,10 @@ public class CityServiceImpl implements CityService {
     @Override
     public City getById(int id) {
         return cityRepository.findCityById(id);
+    }
+
+    @Override
+    public City getByUser(User user) {
+        return cityRepository.findCityByUsers(user);
     }
 }
