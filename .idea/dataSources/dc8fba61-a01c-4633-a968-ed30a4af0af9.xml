@@ -1302,7 +1302,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="367" parent="290" name="imgBlob">
+    <column id="367" parent="290" name="img_blob">
       <Position>2</Position>
       <DataType>blob|0s</DataType>
     </column>

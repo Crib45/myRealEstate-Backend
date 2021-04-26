@@ -69,7 +69,7 @@ public class Picture {
     }
 
     @Lob
-    @Column(name = "imgBlob")
+    @Column(name = "img_blob")
     public Blob getImgBlob() {
         return imgBlob;
     }
