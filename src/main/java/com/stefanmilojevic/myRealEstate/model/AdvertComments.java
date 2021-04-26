@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,15 +16,13 @@ public class AdvertComments {
     private Integer quote;
     private String comment;
     private Timestamp createdAt;
-    @JsonBackReference(value = "ad-comment-made-by")
     private User userByMadeBy;
-    @JsonBackReference(value = "advert-comment")
     private Advertisement advertisementByAdvertisementId;
-    @JsonBackReference(value = "referred-quote")
     private AdvertComments advertCommentsByQuote;
     // Replies to advert-comment
-    @JsonManagedReference(value = "referred-quote")
+    @JsonIgnore
     private List<AdvertComments> advertCommentsById;
+
 
     @Id
     @Column(name = "id")

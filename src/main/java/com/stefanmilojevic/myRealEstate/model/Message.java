@@ -11,9 +11,7 @@ public class Message {
     private String content;
     private Byte seen;
     private Timestamp createdAt;
-    @JsonBackReference(value = "sent-messages")
     private User userBySender;
-    @JsonBackReference(value = "received-messages")
     private User userByReceiver;
 
     @Id

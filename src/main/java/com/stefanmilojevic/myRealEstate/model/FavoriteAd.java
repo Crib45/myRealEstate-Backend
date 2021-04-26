@@ -10,9 +10,7 @@ import java.sql.Timestamp;
 public class FavoriteAd {
     private int id;
     private Timestamp lastChecked;
-    @JsonBackReference(value = "favorite-ad-user")
     private User userByUserId;
-    @JsonBackReference(value = "favorite-advert")
     private Advertisement advertisementByAdvertisementId;
 
     @Id

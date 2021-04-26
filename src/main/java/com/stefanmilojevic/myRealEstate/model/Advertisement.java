@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,13 +18,12 @@ public class Advertisement {
     private Timestamp expireDate;
     private Timestamp createdAt;
     private Timestamp editedAt;
-    @JsonManagedReference(value = "advert-comment")
+    @JsonIgnore
     private List<AdvertComments> advertCommentsById;
-    @JsonBackReference(value = "advert-made-by")
     private User userByOwnerId;
-    @JsonManagedReference(value = "estate-advert")
+    @JsonIgnore
     private List<Estate> estatesById;
-    @JsonManagedReference(value = "favorite-advert")
+    @JsonIgnore
     private List<FavoriteAd> favoriteAdsById;
 
     @Id

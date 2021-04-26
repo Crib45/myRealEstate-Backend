@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Picture {
     private String title;
     private String caption;
     private byte[] imgBlob;
-    @JsonBackReference(value = "category-picture")
+    @JsonIgnore
     private List<Category> categoryList;
     private String fileName;
     private String contentType;

@@ -1,19 +1,20 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Utility {
     private int id;
     private String name;
-    @JsonBackReference(value = "subcategory-utility")
     private SubCategory subCategoryBySubCategoryId;
-    @JsonManagedReference(value = "utilityestate-utility")
-    private Collection<UtilityEstate> utilityEstatesById;
+    @JsonIgnore
+    private List<UtilityEstate> utilityEstatesById;
 
     @Id
     @Column(name = "id")
@@ -66,11 +67,11 @@ public class Utility {
     }
 
     @OneToMany(mappedBy = "utilityByUtilityId")
-    public Collection<UtilityEstate> getUtilityEstatesById() {
+    public List<UtilityEstate> getUtilityEstatesById() {
         return utilityEstatesById;
     }
 
-    public void setUtilityEstatesById(Collection<UtilityEstate> utilityEstatesById) {
+    public void setUtilityEstatesById(List<UtilityEstate> utilityEstatesById) {
         this.utilityEstatesById = utilityEstatesById;
     }
 }

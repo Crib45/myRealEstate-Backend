@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,21 +18,20 @@ public class User {
     private String username;
     private String password;
     private Timestamp createdAt;
-    @JsonManagedReference(value = "ad-comment-made-by")
+    @JsonIgnore
     private List<AdvertComments> advertCommentsById;
-    @JsonManagedReference(value = "advert-made-by")
+    @JsonIgnore
     private List<Advertisement> advertisementsById;
-    @JsonManagedReference(value = "favorite-ad-user")
+    @JsonIgnore
     private List<FavoriteAd> favoriteAdsById;
-    @JsonManagedReference(value = "sent-messages")
+    @JsonIgnore
     private List<Message> sentMessages;
-    @JsonManagedReference(value = "received-messages")
+    @JsonIgnore
     private List<Message> receivedMessages;
-    @JsonManagedReference(value = "profile-comments-received")
+    @JsonIgnore
     private List<ProfileComments> profileCommentsById;
-    @JsonManagedReference(value = "profile-comments-sent")
+    @JsonIgnore
     private List<ProfileComments> profileCommentsById_0;
-    @JsonBackReference(value = "user-city")
     private City city;
 
     @Id

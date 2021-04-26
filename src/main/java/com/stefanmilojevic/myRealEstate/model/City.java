@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -11,9 +12,9 @@ public class City {
     private String name;
     private String description;
     private Integer population;
-    @JsonManagedReference(value = "estate-city")
+    @JsonIgnore
     private List<Estate> estatesById;
-    @JsonManagedReference(value = "user-city")
+    @JsonIgnore
     private List<User> users;
 
     @Id

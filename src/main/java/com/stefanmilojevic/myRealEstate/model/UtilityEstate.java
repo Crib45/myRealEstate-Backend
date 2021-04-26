@@ -9,9 +9,7 @@ import javax.persistence.*;
 public class UtilityEstate {
     private int id;
     private Integer value;
-    @JsonBackReference(value = "utilityEstate-estate")
     private Estate estateByEstateId;
-    @JsonBackReference(value = "utilityestate-utility")
     private Utility utilityByUtilityId;
 
     @Id

@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,11 +13,10 @@ public class SubCategory {
     private int id;
     private String title;
     private String description;
-    @JsonManagedReference(value = "subcategory-estate")
+    @JsonIgnore
     private List<Estate> estatesById;
-    @JsonBackReference(value = "subcategory-category")
     private Category categoryByCategoryId;
-    @JsonManagedReference(value = "subcategory-utility")
+    @JsonIgnore
     private List<Utility> utilitiesById;
 
     @Id
