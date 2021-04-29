@@ -22,8 +22,8 @@ public class PictureServiceImpl implements PictureService{
     @Override
     public String uploadPhoto(MultipartFile file) throws SQLException, IOException {
         Picture picture = new Picture();
-        picture.setFileName(file.getName());
-        picture.setTitle(file.getName());
+        picture.setFileName(file.getOriginalFilename());
+        picture.setTitle(file.getOriginalFilename());
         picture.setContentType(file.getContentType());
         picture.setCaption("test picture");
         byte[] imgBytes = file.getBytes();

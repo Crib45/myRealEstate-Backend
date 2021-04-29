@@ -13,7 +13,7 @@ public class Category {
     private int id;
     private String title;
     private String description;
-    private Picture pictureById;
+    private Picture picture;
     @JsonIgnore
     private List<SubCategory> subCategoriesById;
 
@@ -82,11 +82,11 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "picture_id", referencedColumnName = "id")
-    public Picture getPictureById() {
-        return pictureById;
+    public Picture getPicture() {
+        return picture;
     }
 
-    public void setPictureById(Picture pictureById) {
-        this.pictureById = pictureById;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 }

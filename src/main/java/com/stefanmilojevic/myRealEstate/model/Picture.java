@@ -80,7 +80,7 @@ public class Picture {
         this.imgBlob = imgBlob;
     }
 
-    @OneToMany(mappedBy = "pictureById")
+    @OneToMany(mappedBy = "picture")
     public List<Category> getCategoryList() {
         return categoryList;
     }
