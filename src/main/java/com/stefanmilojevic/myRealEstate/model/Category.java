@@ -1,8 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +13,7 @@ public class Category {
     private String description;
     private Picture picture;
     @JsonIgnore
-    private List<SubCategory> subCategoriesById;
+    private List<SubCategory> subCategories;
 
     @Id
     @Column(name = "id")
@@ -71,12 +69,12 @@ public class Category {
     }
 
     @OneToMany(mappedBy = "category")
-    public List<SubCategory> getSubCategoriesById() {
-        return subCategoriesById;
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
     }
 
-    public void setSubCategoriesById(List<SubCategory> subCategoriesById) {
-        this.subCategoriesById = subCategoriesById;
+    public void setSubCategories(List<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 
 

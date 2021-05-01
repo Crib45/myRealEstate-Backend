@@ -15,7 +15,7 @@ public class Estate {
     private Timestamp createdAt;
     private Advertisement advertisementByAdvertisementId;
     private City cityByCityId;
-    private SubCategory subCategoryBySubCategoryId;
+    private SubCategory subCategory;
     @JsonIgnore
     private List<UtilityEstate> utilityEstatesById;
 
@@ -93,12 +93,12 @@ public class Estate {
 
     @ManyToOne
     @JoinColumn(name = "sub_category_id", referencedColumnName = "id")
-    public SubCategory getSubCategoryBySubCategoryId() {
-        return subCategoryBySubCategoryId;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
-    public void setSubCategoryBySubCategoryId(SubCategory subCategoryBySubCategoryId) {
-        this.subCategoryBySubCategoryId = subCategoryBySubCategoryId;
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 
     @OneToMany(mappedBy = "estateByEstateId")

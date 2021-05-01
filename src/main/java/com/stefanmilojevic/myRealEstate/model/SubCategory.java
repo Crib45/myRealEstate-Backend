@@ -1,8 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,10 +12,9 @@ public class SubCategory {
     private String title;
     private String description;
     @JsonIgnore
-    private List<Estate> estatesById;
+    private List<Estate> estates;
     private Category category;
-    @JsonIgnore
-    private List<Utility> utilitiesById;
+    private List<Utility> utilities;
 
     @Id
     @Column(name = "id")
@@ -72,13 +69,13 @@ public class SubCategory {
         return result;
     }
 
-    @OneToMany(mappedBy = "subCategoryBySubCategoryId")
-    public List<Estate> getEstatesById() {
-        return estatesById;
+    @OneToMany(mappedBy = "subCategory")
+    public List<Estate> getEstates() {
+        return estates;
     }
 
-    public void setEstatesById(List<Estate> estatesById) {
-        this.estatesById = estatesById;
+    public void setEstates(List<Estate> estates) {
+        this.estates = estates;
     }
 
     @ManyToOne
@@ -91,12 +88,20 @@ public class SubCategory {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "subCategoryBySubCategoryId")
-    public List<Utility> getUtilitiesById() {
-        return utilitiesById;
+//    @OneToMany(mappedBy = "subCategory")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "sub_category_utility",
+            joinColumns = {
+                    @JoinColumn(name = "sub_category_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "utility_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    public List<Utility> getUtilities() {
+        return utilities;
     }
 
-    public void setUtilitiesById(List<Utility> utilitiesById) {
-        this.utilitiesById = utilitiesById;
+    public void setUtilities(List<Utility> utilities) {
+        this.utilities = utilities;
     }
 }
