@@ -70,7 +70,7 @@ public class Category {
         return result;
     }
 
-    @OneToMany(mappedBy = "categoryByCategoryId")
+    @OneToMany(mappedBy = "category")
     public List<SubCategory> getSubCategoriesById() {
         return subCategoriesById;
     }

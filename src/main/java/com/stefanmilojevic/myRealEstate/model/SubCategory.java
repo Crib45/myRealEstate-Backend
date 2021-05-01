@@ -15,7 +15,7 @@ public class SubCategory {
     private String description;
     @JsonIgnore
     private List<Estate> estatesById;
-    private Category categoryByCategoryId;
+    private Category category;
     @JsonIgnore
     private List<Utility> utilitiesById;
 
@@ -83,12 +83,12 @@ public class SubCategory {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    public Category getCategoryByCategoryId() {
-        return categoryByCategoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryByCategoryId(Category categoryByCategoryId) {
-        this.categoryByCategoryId = categoryByCategoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @OneToMany(mappedBy = "subCategoryBySubCategoryId")
