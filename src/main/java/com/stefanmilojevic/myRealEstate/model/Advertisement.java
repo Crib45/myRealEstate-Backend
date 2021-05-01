@@ -22,12 +22,13 @@ public class Advertisement {
     private List<AdvertComments> advertCommentsById;
     private User userByOwnerId;
     @JsonIgnore
-    private List<Estate> estatesById;
+    private Estate estate;
     @JsonIgnore
     private List<FavoriteAd> favoriteAdsById;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -160,13 +161,14 @@ public class Advertisement {
         this.userByOwnerId = userByOwnerId;
     }
 
-    @OneToMany(mappedBy = "advertisementByAdvertisementId")
-    public List<Estate> getEstatesById() {
-        return estatesById;
+    @OneToOne(mappedBy = "advertisement", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    public Estate getEstate() {
+        return estate;
     }
 
-    public void setEstatesById(List<Estate> estatesById) {
-        this.estatesById = estatesById;
+    public void setEstate(Estate estate) {
+        this.estate = estate;
     }
 
     @OneToMany(mappedBy = "advertisementByAdvertisementId")

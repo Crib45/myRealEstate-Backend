@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class UtilityEstate {
     private int id;
     private Integer value;
-    private Estate estateByEstateId;
+    private Estate estate;
     private Utility utilityByUtilityId;
 
     @Id
@@ -54,13 +54,13 @@ public class UtilityEstate {
     }
 
     @ManyToOne
-    @JoinColumn(name = "estate_id", referencedColumnName = "id")
-    public Estate getEstateByEstateId() {
-        return estateByEstateId;
+    @JoinColumn(name = "estate_id", referencedColumnName = "advertisement_id")
+    public Estate getEstate() {
+        return estate;
     }
 
-    public void setEstateByEstateId(Estate estateByEstateId) {
-        this.estateByEstateId = estateByEstateId;
+    public void setEstate(Estate estate) {
+        this.estate = estate;
     }
 
     @ManyToOne

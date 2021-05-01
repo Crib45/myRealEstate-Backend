@@ -13,14 +13,14 @@ public class Estate {
     private int id;
     private Integer size;
     private Timestamp createdAt;
-    private Advertisement advertisementByAdvertisementId;
+    private Advertisement advertisement;
     private City cityByCityId;
     private SubCategory subCategory;
     @JsonIgnore
-    private List<UtilityEstate> utilityEstatesById;
+    private List<UtilityEstate> utilityEstate;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "advertisement_id")
     public int getId() {
         return id;
     }
@@ -71,14 +71,15 @@ public class Estate {
         return result;
     }
 
-    @ManyToOne
+    @OneToOne
+    @MapsId
     @JoinColumn(name = "advertisement_id", referencedColumnName = "id")
-    public Advertisement getAdvertisementByAdvertisementId() {
-        return advertisementByAdvertisementId;
+    public Advertisement getAdvertisement() {
+        return advertisement;
     }
 
-    public void setAdvertisementByAdvertisementId(Advertisement advertisementByAdvertisementId) {
-        this.advertisementByAdvertisementId = advertisementByAdvertisementId;
+    public void setAdvertisement(Advertisement advertisement) {
+        this.advertisement = advertisement;
     }
 
     @ManyToOne
@@ -101,12 +102,12 @@ public class Estate {
         this.subCategory = subCategory;
     }
 
-    @OneToMany(mappedBy = "estateByEstateId")
-    public List<UtilityEstate> getUtilityEstatesById() {
-        return utilityEstatesById;
+    @OneToMany(mappedBy = "estate")
+    public List<UtilityEstate> getUtilityEstate() {
+        return utilityEstate;
     }
 
-    public void setUtilityEstatesById(List<UtilityEstate> utilityEstatesById) {
-        this.utilityEstatesById = utilityEstatesById;
+    public void setUtilityEstate(List<UtilityEstate> utilityEstate) {
+        this.utilityEstate = utilityEstate;
     }
 }
