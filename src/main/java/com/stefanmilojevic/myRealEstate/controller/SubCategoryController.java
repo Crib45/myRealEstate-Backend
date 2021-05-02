@@ -26,4 +26,9 @@ public class SubCategoryController {
         public ResponseEntity<List<SubCategory>> getAllByCategoryTitle(@PathVariable String categoryTitle) {
         return ResponseEntity.ok(subCategoryService.getAllByCategoryTitle(categoryTitle));
     }
+
+    @GetMapping("/getAllByCategoryId/{categoryId}")
+    public ResponseEntity<List<SubCategory>> getAllByCategoryTitle(@PathVariable int categoryId) {
+        return ResponseEntity.ok(subCategoryService.getAllByCategoryId(categoryId));
+    }
 }

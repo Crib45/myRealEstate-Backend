@@ -25,4 +25,10 @@ public class SubCategoryServiceImpl implements SubCategoryService{
         Category category = categoryService.getByTitle(categoryTitle);
         return subCategoryRepository.findAllByCategory(category);
     }
+
+    @Override
+    public List<SubCategory> getAllByCategoryId(int categoryId) {
+        Category category = categoryService.getById(categoryId);
+        return subCategoryRepository.findAllByCategory(category);
+    }
 }

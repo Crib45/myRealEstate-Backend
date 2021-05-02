@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
     public User getByEmail(String username) {
         User user = userRepository.getByEmail(username);
         user.setCity(cityService.getByUser(user));
-        System.out.println(user.getCity());
         return userRepository.getByEmail(username);
     }
 
