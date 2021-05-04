@@ -158,7 +158,7 @@ public class User {
         this.advertCommentsById = advertCommentsById;
     }
 
-    @OneToMany(mappedBy = "userByOwnerId")
+    @OneToMany(mappedBy = "owner")
     public List<Advertisement> getAdvertisementsById() {
         return advertisementsById;
     }

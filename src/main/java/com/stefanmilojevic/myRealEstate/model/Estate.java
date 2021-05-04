@@ -13,8 +13,9 @@ public class Estate {
     private int id;
     private Integer size;
     private Timestamp createdAt;
+    @JsonIgnore
     private Advertisement advertisement;
-    private City cityByCityId;
+    private City city;
     private SubCategory subCategory;
     @JsonIgnore
     private List<UtilityEstate> utilityEstate;
@@ -71,9 +72,9 @@ public class Estate {
         return result;
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    @JoinColumn(name = "advertisement_id", referencedColumnName = "id")
+//    @JoinColumn(name = "advertisement_id", referencedColumnName = "id")
     public Advertisement getAdvertisement() {
         return advertisement;
     }
@@ -84,12 +85,12 @@ public class Estate {
 
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id")
-    public City getCityByCityId() {
-        return cityByCityId;
+    public City getCity() {
+        return city;
     }
 
-    public void setCityByCityId(City cityByCityId) {
-        this.cityByCityId = cityByCityId;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @ManyToOne

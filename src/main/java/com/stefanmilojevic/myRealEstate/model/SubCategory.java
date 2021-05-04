@@ -13,6 +13,7 @@ public class SubCategory {
     private String description;
     @JsonIgnore
     private List<Estate> estates;
+    @JsonIgnore
     private Category category;
     private List<Utility> utilities;
 

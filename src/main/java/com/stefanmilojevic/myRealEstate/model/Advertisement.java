@@ -3,6 +3,7 @@ package com.stefanmilojevic.myRealEstate.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -20,15 +21,14 @@ public class Advertisement {
     private Timestamp editedAt;
     @JsonIgnore
     private List<AdvertComments> advertCommentsById;
-    private User userByOwnerId;
-    @JsonIgnore
+    private User owner;
     private Estate estate;
     @JsonIgnore
     private List<FavoriteAd> favoriteAdsById;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -153,21 +153,31 @@ public class Advertisement {
 
     @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    public User getUserByOwnerId() {
-        return userByOwnerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUserByOwnerId(User userByOwnerId) {
-        this.userByOwnerId = userByOwnerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    @OneToOne(mappedBy = "advertisement", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+//    @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+//    @PrimaryKeyJoinColumn
     public Estate getEstate() {
         return estate;
     }
 
     public void setEstate(Estate estate) {
+//        this.estate = estate;
+        if (estate == null) {
+            if (this.estate != null) {
+                this.estate.setAdvertisement(null);
+            }
+        }
+        else {
+            estate.setAdvertisement(this);
+        }
         this.estate = estate;
     }
 

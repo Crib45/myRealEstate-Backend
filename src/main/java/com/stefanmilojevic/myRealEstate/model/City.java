@@ -81,7 +81,7 @@ public class City {
         return result;
     }
 
-    @OneToMany(mappedBy = "cityByCityId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     public List<Estate> getEstatesById() {
         return estatesById;
     }
