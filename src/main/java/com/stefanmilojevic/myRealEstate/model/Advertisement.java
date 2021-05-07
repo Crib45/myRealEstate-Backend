@@ -1,9 +1,9 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
+
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,7 +15,7 @@ public class Advertisement {
     private String title;
     private String description;
     private Integer price;
-    private Byte finished;
+    private Boolean finished;
     private Timestamp expireDate;
     private Timestamp createdAt;
     private Timestamp editedAt;
@@ -68,12 +68,13 @@ public class Advertisement {
     }
 
     @Basic
-    @Column(name = "finished")
-    public Byte getFinished() {
+    @Column(name = "finished", nullable = false, columnDefinition = "TINYINT(1)")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public Boolean getFinished() {
         return finished;
     }
 
-    public void setFinished(Byte finished) {
+    public void setFinished(Boolean finished) {
         this.finished = finished;
     }
 
@@ -119,7 +120,6 @@ public class Advertisement {
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (finished != null ? !finished.equals(that.finished) : that.finished != null) return false;
         if (expireDate != null ? !expireDate.equals(that.expireDate) : that.expireDate != null) return false;
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
         if (editedAt != null ? !editedAt.equals(that.editedAt) : that.editedAt != null) return false;
@@ -134,7 +134,6 @@ public class Advertisement {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (finished != null ? finished.hashCode() : 0);
         result = 31 * result + (expireDate != null ? expireDate.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (editedAt != null ? editedAt.hashCode() : 0);

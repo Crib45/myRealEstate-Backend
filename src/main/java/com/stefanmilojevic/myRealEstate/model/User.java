@@ -224,7 +224,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "password="+password;
+        return "id="+id;
     }
 }
 

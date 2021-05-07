@@ -1,27 +1,44 @@
 package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.model.Advertisement;
-import com.stefanmilojevic.myRealEstate.model.Estate;
+import com.stefanmilojevic.myRealEstate.model.User;
 import com.stefanmilojevic.myRealEstate.repository.AdvertisementRepository;
-import com.stefanmilojevic.myRealEstate.repository.EstateRepository;
+import com.stefanmilojevic.myRealEstate.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class AdvertisementServiceImpl implements AdvertisementService {
 
     private final AdvertisementRepository advertisementRepository;
-    private final EstateRepository estateRepository;
+    private UserService userService;
+
     @Autowired
-    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository, EstateRepository estateRepository) {
+    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository) {
         this.advertisementRepository = advertisementRepository;
-        this.estateRepository = estateRepository;
     }
 
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
-    public Advertisement save(Advertisement advertisement) {
+    public Advertisement save(Advertisement advertisement, HttpServletRequest request) {
+        advertisement.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
+        advertisement.setOwner(user);
         advertisementRepository.save(advertisement);
         return advertisement;
+    }
+
+    @Override
+    public List<Advertisement> getAllByLogged(HttpServletRequest request) {
+        User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
+        return advertisementRepository.findAllByOwner(user);
     }
 }

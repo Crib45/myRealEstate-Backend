@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
 public class Message {
     private int id;
     private String content;
-    private Byte seen;
+    private Boolean seen;
     private Timestamp createdAt;
     private User userBySender;
     private User userByReceiver;
@@ -36,12 +37,13 @@ public class Message {
     }
 
     @Basic
-    @Column(name = "seen")
-    public Byte getSeen() {
+    @Column(name = "seen",nullable = false, columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public Boolean getSeen() {
         return seen;
     }
 
-    public void setSeen(Byte seen) {
+    public void setSeen(Boolean seen) {
         this.seen = seen;
     }
 
@@ -64,7 +66,6 @@ public class Message {
 
         if (id != message.id) return false;
         if (content != null ? !content.equals(message.content) : message.content != null) return false;
-        if (seen != null ? !seen.equals(message.seen) : message.seen != null) return false;
         if (createdAt != null ? !createdAt.equals(message.createdAt) : message.createdAt != null) return false;
 
         return true;
@@ -74,7 +75,6 @@ public class Message {
     public int hashCode() {
         int result = id;
         result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (seen != null ? seen.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         return result;
     }
