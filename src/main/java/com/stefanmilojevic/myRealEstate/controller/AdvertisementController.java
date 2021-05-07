@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @RequestMapping("/advertisement")
@@ -30,5 +28,10 @@ public class AdvertisementController {
     @GetMapping("/getAllByLogged")
     public ResponseEntity<List<Advertisement>> getAllByLogged(HttpServletRequest request) {
         return ResponseEntity.ok(advertisementService.getAllByLogged(request));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> getById(@PathVariable int id) {
+        return ResponseEntity.ok(advertisementService.delete(id));
     }
 }

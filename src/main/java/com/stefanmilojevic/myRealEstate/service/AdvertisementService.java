@@ -19,4 +19,17 @@ public interface AdvertisementService {
      * @return List of advertisements
      */
     List<Advertisement> getAllByLogged(HttpServletRequest request);
+
+    /**
+     * Deletes selected advertisement from db
+     * @param id id of Advertisement for deleting
+     */
+    String delete(int id);
+
+    /**
+     * Returns Advertisement by id
+     * @param id id of Advertisement
+     * @return Advertisement
+     */
+    Advertisement getById(int id);
 }

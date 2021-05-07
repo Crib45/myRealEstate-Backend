@@ -41,4 +41,16 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
         return advertisementRepository.findAllByOwner(user);
     }
+
+    @Override
+    public String delete(int id) {
+        Advertisement advertisement = advertisementRepository.findById(id);
+        advertisementRepository.delete(advertisement);
+        return "Success";
+    }
+
+    @Override
+    public Advertisement getById(int id) {
+        return advertisementRepository.findById(id);
+    }
 }

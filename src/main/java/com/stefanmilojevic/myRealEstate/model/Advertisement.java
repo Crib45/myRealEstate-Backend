@@ -25,6 +25,9 @@ public class Advertisement {
     private Estate estate;
     @JsonIgnore
     private List<FavoriteAd> favoriteAdsById;
+    private Boolean published;
+    @JsonIgnore
+    private List<AdvertisementPicture> advertisementPictures;
 
     @Id
     @Column(name = "id")
@@ -68,7 +71,7 @@ public class Advertisement {
     }
 
     @Basic
-    @Column(name = "finished", nullable = false, columnDefinition = "TINYINT(1)")
+    @Column(name = "finished", nullable = true, columnDefinition = "TINYINT(1)")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public Boolean getFinished() {
         return finished;
@@ -76,6 +79,17 @@ public class Advertisement {
 
     public void setFinished(Boolean finished) {
         this.finished = finished;
+    }
+
+    @Basic
+    @Column(name = "published", nullable = true, columnDefinition = "TINYINT(1)")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
     }
 
     @Basic
@@ -187,5 +201,14 @@ public class Advertisement {
 
     public void setFavoriteAdsById(List<FavoriteAd> favoriteAdsById) {
         this.favoriteAdsById = favoriteAdsById;
+    }
+
+    @OneToMany(mappedBy = "advertisement")
+    public List<AdvertisementPicture> getAdvertisementPictures() {
+        return advertisementPictures;
+    }
+
+    public void setAdvertisementPictures(List<AdvertisementPicture> advertisementPictures) {
+        this.advertisementPictures = advertisementPictures;
     }
 }
