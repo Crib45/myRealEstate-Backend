@@ -53,4 +53,13 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public Advertisement getById(int id) {
         return advertisementRepository.findById(id);
     }
+
+    @Override
+    public Advertisement publish(int id) {
+        Advertisement advertisement = advertisementRepository.findById(id);
+        advertisement.setPublished(true);
+        return advertisementRepository.save(advertisement);
+    }
+
+
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/city")
+@RequestMapping("/cities")
 @RestController
 public class CityController {
 
@@ -19,7 +19,7 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping()
     public ResponseEntity<List<City>> getAll() {
         return ResponseEntity.ok(cityService.getAll());
     }

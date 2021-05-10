@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@RequestMapping("/picture")
+@RequestMapping("/pictures")
 @RestController
 public class PictureController {
 
@@ -23,7 +23,7 @@ public class PictureController {
         this.pictureService = pictureService;
     }
 
-    @PostMapping("/uploadPicture")
+    @PostMapping()
     public ResponseEntity<String> uploadPicture(@RequestBody MultipartFile file) throws SQLException, IOException {
         return ResponseEntity.ok(pictureService.uploadPhoto(file));
     }

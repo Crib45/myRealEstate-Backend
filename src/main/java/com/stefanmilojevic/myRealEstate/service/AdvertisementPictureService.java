@@ -1,7 +1,9 @@
 package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.model.AdvertisementPicture;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface AdvertisementPictureService {
@@ -14,8 +16,10 @@ public interface AdvertisementPictureService {
 
     /**
      * Saves AdvertisementPicture
-     * @param advertisementPicture AdvertisementPicture
+     * @param file MultipartFile
      * @return Success message
      */
-    String save(AdvertisementPicture advertisementPicture);
+    String save(MultipartFile file, int advertisementId) throws IOException;
+
+    String delete(int id);
 }

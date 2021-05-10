@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AdvertisementPictureRepository extends JpaRepository<AdvertisementPicture, Long> {
+public interface AdvertisementPictureRepository extends JpaRepository<AdvertisementPicture, Integer> {
     List<AdvertisementPicture> findAllByAdvertisement_Id(int advertisementId);
 }

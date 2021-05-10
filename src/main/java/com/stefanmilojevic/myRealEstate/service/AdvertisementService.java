@@ -32,4 +32,11 @@ public interface AdvertisementService {
      * @return Advertisement
      */
     Advertisement getById(int id);
+
+    /**
+     * Changes publish status of given advertisement to true
+     * @param id Id of Advertisement
+     * @return Advertisement
+     */
+    Advertisement publish(int id);
 }

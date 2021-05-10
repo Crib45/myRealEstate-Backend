@@ -20,7 +20,7 @@ public class AdvertisementController {
         this.advertisementService = advertisementService;
     }
 
-    @PostMapping("/save")
+    @PostMapping()
     public ResponseEntity<Advertisement> save(@RequestBody Advertisement advertisement, HttpServletRequest request) {
         return ResponseEntity.ok(advertisementService.save(advertisement, request));
     }
@@ -30,8 +30,13 @@ public class AdvertisementController {
         return ResponseEntity.ok(advertisementService.getAllByLogged(request));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> getById(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable int id) {
         return ResponseEntity.ok(advertisementService.delete(id));
+    }
+
+    @PutMapping("/publish/{id}")
+    public ResponseEntity<Advertisement> publish(@PathVariable int id) {
+        return ResponseEntity.ok(advertisementService.publish(id));
     }
 }

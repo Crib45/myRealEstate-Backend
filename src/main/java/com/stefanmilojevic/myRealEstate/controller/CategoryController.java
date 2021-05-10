@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/category")
+@RequestMapping("/categories")
 @RestController
 public class CategoryController {
 
@@ -26,7 +26,7 @@ public class CategoryController {
      *  Returns list of all categories from database
      * @return List<Category>
      */
-    @GetMapping("/getAll")
+    @GetMapping()
     public ResponseEntity<List<Category>> getAll() {
         return ResponseEntity.ok(categoryService.getAll());
     }
