@@ -211,4 +211,24 @@ public class Advertisement {
     public void setAdvertisementPictures(List<AdvertisementPicture> advertisementPictures) {
         this.advertisementPictures = advertisementPictures;
     }
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", finished=" + finished +
+                ", expireDate=" + expireDate +
+                ", createdAt=" + createdAt +
+                ", editedAt=" + editedAt +
+                ", advertCommentsById=" + advertCommentsById +
+                ", owner=" + owner +
+                ", estate=" + estate +
+                ", favoriteAdsById=" + favoriteAdsById +
+                ", published=" + published +
+                ", advertisementPictures=" + advertisementPictures +
+                '}';
+    }
 }

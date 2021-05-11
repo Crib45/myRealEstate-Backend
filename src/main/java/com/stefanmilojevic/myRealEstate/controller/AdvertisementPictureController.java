@@ -36,4 +36,9 @@ public class AdvertisementPictureController {
     public ResponseEntity<String> deleteById(@PathVariable int id) {
         return ResponseEntity.ok(advertisementPictureService.delete(id));
     }
+
+    @PutMapping("/setPrimary/{advertisementId}/{id}")
+    public ResponseEntity<AdvertisementPicture> setPrimary(@PathVariable int advertisementId, @PathVariable int id) {
+        return ResponseEntity.ok(advertisementPictureService.setPrimaryById(advertisementId, id));
+    }
 }

@@ -1,8 +1,10 @@
 package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.model.Advertisement;
+import com.stefanmilojevic.myRealEstate.model.Estate;
 import com.stefanmilojevic.myRealEstate.model.User;
 import com.stefanmilojevic.myRealEstate.repository.AdvertisementRepository;
+import com.stefanmilojevic.myRealEstate.repository.EstateRepository;
 import com.stefanmilojevic.myRealEstate.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,14 @@ import java.util.List;
 public class AdvertisementServiceImpl implements AdvertisementService {
 
     private final AdvertisementRepository advertisementRepository;
+    private final EstateRepository estateRepository;
     private UserService userService;
 
     @Autowired
-    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository) {
+    public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository,
+                                    EstateRepository estateRepository) {
         this.advertisementRepository = advertisementRepository;
+        this.estateRepository = estateRepository;
     }
 
     @Autowired
@@ -29,10 +34,27 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     @Override
     public Advertisement save(Advertisement advertisement, HttpServletRequest request) {
-        advertisement.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
         advertisement.setOwner(user);
-        advertisementRepository.save(advertisement);
+        if(advertisement.getId() != 0) {
+            Advertisement advertisementForSave = advertisementRepository.findById(advertisement.getId());
+            advertisement.setEditedAt(new Timestamp(System.currentTimeMillis()));
+            advertisementForSave.setEditedAt(advertisement.getEditedAt());
+            advertisementForSave.setTitle(advertisement.getTitle());
+            Estate estate = estateRepository.findById(advertisementForSave.getId());
+            estate.setCity(advertisement.getEstate().getCity());
+            estate.setSize(advertisement.getEstate().getSize());
+            estate.setSubCategory(advertisement.getEstate().getSubCategory());
+            advertisementForSave.setEstate(estate);
+            advertisementForSave.setExpireDate(advertisement.getExpireDate());
+            advertisementForSave.setPublished(advertisement.getPublished());
+            advertisementRepository.save(advertisementForSave);
+        }
+        else {
+            advertisement.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            advertisementRepository.save(advertisement);
+        }
+
         return advertisement;
     }
 

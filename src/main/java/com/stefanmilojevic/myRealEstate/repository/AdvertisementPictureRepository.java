@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface AdvertisementPictureRepository extends JpaRepository<AdvertisementPicture, Integer> {
     List<AdvertisementPicture> findAllByAdvertisement_Id(int advertisementId);
+    AdvertisementPicture findById(int id);
 }

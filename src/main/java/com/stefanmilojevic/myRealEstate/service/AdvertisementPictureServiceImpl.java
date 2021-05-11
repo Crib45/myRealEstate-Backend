@@ -16,9 +16,10 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
 
     private final AdvertisementPictureRepository advertisementPictureRepository;
     private final AdvertisementService advertisementService;
+
     @Autowired
-    public AdvertisementPictureServiceImpl( AdvertisementPictureRepository advertisementPictureRepository,
-                                            AdvertisementService advertisementService) {
+    public AdvertisementPictureServiceImpl(AdvertisementPictureRepository advertisementPictureRepository,
+                                           AdvertisementService advertisementService) {
         this.advertisementService = advertisementService;
         this.advertisementPictureRepository = advertisementPictureRepository;
     }
@@ -45,5 +46,16 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
     public String delete(int id) {
         advertisementPictureRepository.deleteById(id);
         return "Success";
+    }
+
+    @Override
+    public AdvertisementPicture setPrimaryById(int advertisementId, int id) {
+        List<AdvertisementPicture> advertisementPictureList;
+        advertisementPictureList = advertisementPictureRepository.findAllByAdvertisement_Id(advertisementId);
+        for(AdvertisementPicture advertisementPicture : advertisementPictureList){
+            advertisementPicture.setPrimaryPic(advertisementPicture.getId() == id);
+        }
+        advertisementPictureRepository.saveAll(advertisementPictureList);
+        return advertisementPictureRepository.findById(id);
     }
 }
