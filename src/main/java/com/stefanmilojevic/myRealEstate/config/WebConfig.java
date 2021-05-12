@@ -39,8 +39,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/cities").permitAll()
                 .antMatchers("/user/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/categories").permitAll()
                 .antMatchers("/subcategory/getAllByCategoryTitle/**").permitAll()
+                .antMatchers("/advertisement/getAllPublishedBySubCategoryId/**").permitAll()
+                .antMatchers("/advertisementPictures/getPrimaryByAdvertisementId/{advertisementId}/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();
@@ -57,13 +59,12 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH","OPTIONS")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH", "OPTIONS")
                         .allowedHeaders("*")
                         .allowedOrigins("*");
             }
         };
     }
-
 
 
 }

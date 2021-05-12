@@ -36,4 +36,6 @@ public interface AdvertisementPictureService {
      * @return AdvertisementPicture primary object
      */
     AdvertisementPicture setPrimaryById(int advertisementId, int id);
+
+    AdvertisementPicture getPrimaryByAdvertisementId(int advertisementId);
 }

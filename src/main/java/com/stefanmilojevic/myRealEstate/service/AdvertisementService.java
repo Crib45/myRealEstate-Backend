@@ -39,4 +39,11 @@ public interface AdvertisementService {
      * @return Advertisement
      */
     Advertisement publish(int id);
+
+    /**
+     * Get all published <code>Advertisements</code> of selected <code>SubCategory</code>
+     * @param subcategoryId id of <code>SubCategory</code>
+     * @return List of <code>Advertisement</code>
+     */
+    List<Advertisement> getAllPublishedBySubCategoryId(int subcategoryId);
 }

@@ -83,5 +83,10 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         return advertisementRepository.save(advertisement);
     }
 
+    @Override
+    public List<Advertisement> getAllPublishedBySubCategoryId(int subcategoryId) {
+        return advertisementRepository.findAllByPublishedAndEstate_SubCategoryId(true,subcategoryId);
+    }
+
 
 }

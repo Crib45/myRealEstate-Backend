@@ -41,4 +41,9 @@ public class AdvertisementPictureController {
     public ResponseEntity<AdvertisementPicture> setPrimary(@PathVariable int advertisementId, @PathVariable int id) {
         return ResponseEntity.ok(advertisementPictureService.setPrimaryById(advertisementId, id));
     }
+
+    @GetMapping("/getPrimaryByAdvertisementId/{advertisementId}")
+    public ResponseEntity<AdvertisementPicture> getPrimaryByAdvertisementId(@PathVariable int advertisementId) {
+        return ResponseEntity.ok(advertisementPictureService.getPrimaryByAdvertisementId(advertisementId));
+    }
 }

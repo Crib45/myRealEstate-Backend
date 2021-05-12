@@ -11,4 +11,5 @@ import java.util.List;
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Long> {
     List<Advertisement> findAllByOwner(User user);
     Advertisement findById(int id);
+    List<Advertisement> findAllByPublishedAndEstate_SubCategoryId(Boolean published,int subcategoryId);
 }

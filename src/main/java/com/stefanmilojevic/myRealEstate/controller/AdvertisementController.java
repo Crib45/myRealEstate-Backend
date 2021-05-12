@@ -39,4 +39,9 @@ public class AdvertisementController {
     public ResponseEntity<Advertisement> publish(@PathVariable int id) {
         return ResponseEntity.ok(advertisementService.publish(id));
     }
+
+    @GetMapping("/getAllPublishedBySubCategoryId/{subcategoryId}")
+    public ResponseEntity<List<Advertisement>> getAllPublishedBySubCategoryId(@PathVariable int subcategoryId) {
+        return ResponseEntity.ok(advertisementService.getAllPublishedBySubCategoryId(subcategoryId));
+    }
 }
