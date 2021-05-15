@@ -23,7 +23,7 @@ public class User {
     @JsonIgnore
     private List<Advertisement> advertisementsById;
     @JsonIgnore
-    private List<FavoriteAd> favoriteAdsById;
+    private List<FavoriteAd> favoriteAds;
     @JsonIgnore
     private List<Message> sentMessages;
     @JsonIgnore
@@ -167,13 +167,13 @@ public class User {
         this.advertisementsById = advertisementsById;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
-    public List<FavoriteAd> getFavoriteAdsById() {
-        return favoriteAdsById;
+    @OneToMany(mappedBy = "user")
+    public List<FavoriteAd> getFavoriteAds() {
+        return favoriteAds;
     }
 
-    public void setFavoriteAdsById(List<FavoriteAd> favoriteAdsById) {
-        this.favoriteAdsById = favoriteAdsById;
+    public void setFavoriteAds(List<FavoriteAd> favoriteAds) {
+        this.favoriteAds = favoriteAds;
     }
 
     @OneToMany(mappedBy = "userBySender")

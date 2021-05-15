@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.controller;
 
+import com.stefanmilojevic.myRealEstate.dto.AdvertisementDTO;
 import com.stefanmilojevic.myRealEstate.model.Advertisement;
 import com.stefanmilojevic.myRealEstate.service.AdvertisementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class AdvertisementController {
     }
 
     @GetMapping("/getAllPublishedBySubCategoryId/{subcategoryId}")
-    public ResponseEntity<List<Advertisement>> getAllPublishedBySubCategoryId(@PathVariable int subcategoryId) {
-        return ResponseEntity.ok(advertisementService.getAllPublishedBySubCategoryId(subcategoryId));
+    public ResponseEntity<List<AdvertisementDTO>> getAllAdvertDTO(@PathVariable int subcategoryId, HttpServletRequest request) {
+        return ResponseEntity.ok(advertisementService.getAllPublishedDTOBySubCategoryId(subcategoryId, request));
     }
 }

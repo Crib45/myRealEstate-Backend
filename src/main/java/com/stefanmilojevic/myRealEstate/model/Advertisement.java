@@ -24,7 +24,7 @@ public class Advertisement {
     private User owner;
     private Estate estate;
     @JsonIgnore
-    private List<FavoriteAd> favoriteAdsById;
+    private List<FavoriteAd> favoriteAds;
     private Boolean published;
     @JsonIgnore
     private List<AdvertisementPicture> advertisementPictures;
@@ -194,13 +194,13 @@ public class Advertisement {
         this.estate = estate;
     }
 
-    @OneToMany(mappedBy = "advertisementByAdvertisementId")
-    public List<FavoriteAd> getFavoriteAdsById() {
-        return favoriteAdsById;
+    @OneToMany(mappedBy = "advertisement")
+    public List<FavoriteAd> getFavoriteAds() {
+        return favoriteAds;
     }
 
-    public void setFavoriteAdsById(List<FavoriteAd> favoriteAdsById) {
-        this.favoriteAdsById = favoriteAdsById;
+    public void setFavoriteAds(List<FavoriteAd> favoriteAds) {
+        this.favoriteAds = favoriteAds;
     }
 
     @OneToMany(mappedBy = "advertisement")
@@ -226,7 +226,7 @@ public class Advertisement {
                 ", advertCommentsById=" + advertCommentsById +
                 ", owner=" + owner +
                 ", estate=" + estate +
-                ", favoriteAdsById=" + favoriteAdsById +
+                ", favoriteAdsById=" + favoriteAds +
                 ", published=" + published +
                 ", advertisementPictures=" + advertisementPictures +
                 '}';

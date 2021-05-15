@@ -4,22 +4,24 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "favorite_ad", schema = "myrealestate", catalog = "")
 public class FavoriteAd {
-    private int id;
+    private Long id;
     private Timestamp lastChecked;
-    private User userByUserId;
-    private Advertisement advertisementByAdvertisementId;
+    private User user;
+    private Advertisement advertisement;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,39 +40,32 @@ public class FavoriteAd {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         FavoriteAd that = (FavoriteAd) o;
-
-        if (id != that.id) return false;
-        if (lastChecked != null ? !lastChecked.equals(that.lastChecked) : that.lastChecked != null) return false;
-
-        return true;
+        return Objects.equals(id, that.id) && Objects.equals(lastChecked, that.lastChecked) && Objects.equals(user, that.user) && Objects.equals(advertisement, that.advertisement);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (lastChecked != null ? lastChecked.hashCode() : 0);
-        return result;
+        return Objects.hash(id, lastChecked, user, advertisement);
     }
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUserByUserId() {
-        return userByUserId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserByUserId(User userByUserId) {
-        this.userByUserId = userByUserId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @ManyToOne
     @JoinColumn(name = "advertisement_id", referencedColumnName = "id")
-    public Advertisement getAdvertisementByAdvertisementId() {
-        return advertisementByAdvertisementId;
+    public Advertisement getAdvertisement() {
+        return advertisement;
     }
 
-    public void setAdvertisementByAdvertisementId(Advertisement advertisementByAdvertisementId) {
-        this.advertisementByAdvertisementId = advertisementByAdvertisementId;
+    public void setAdvertisement(Advertisement advertisement) {
+        this.advertisement = advertisement;
     }
 }

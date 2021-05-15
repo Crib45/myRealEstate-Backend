@@ -1,8 +1,8 @@
 package com.stefanmilojevic.myRealEstate.service;
 
-import com.stefanmilojevic.myRealEstate.model.Advertisement;
-import com.stefanmilojevic.myRealEstate.model.Estate;
-import com.stefanmilojevic.myRealEstate.model.User;
+import com.stefanmilojevic.myRealEstate.dto.AdvertisementDTO;
+import com.stefanmilojevic.myRealEstate.model.*;
+import com.stefanmilojevic.myRealEstate.repository.AdvertisementPictureRepository;
 import com.stefanmilojevic.myRealEstate.repository.AdvertisementRepository;
 import com.stefanmilojevic.myRealEstate.repository.EstateRepository;
 import com.stefanmilojevic.myRealEstate.util.UserUtil;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,7 +19,19 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 
     private final AdvertisementRepository advertisementRepository;
     private final EstateRepository estateRepository;
+    private AdvertisementPictureService advertisementPictureService;
     private UserService userService;
+    private FavoriteAdService favoriteAdService;
+
+    @Autowired
+    private void setAdvertisementPictureService(AdvertisementPictureService advertisementPictureService) {
+        this.advertisementPictureService = advertisementPictureService;
+    }
+
+    @Autowired
+    private void setFavoriteAdService(FavoriteAdService favoriteAdService) {
+        this.favoriteAdService = favoriteAdService;
+    }
 
     @Autowired
     public AdvertisementServiceImpl(AdvertisementRepository advertisementRepository,
@@ -86,6 +99,28 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     @Override
     public List<Advertisement> getAllPublishedBySubCategoryId(int subcategoryId) {
         return advertisementRepository.findAllByPublishedAndEstate_SubCategoryId(true,subcategoryId);
+    }
+
+    @Override
+    public List<AdvertisementDTO> getAllPublishedDTOBySubCategoryId(int subcategoryId, HttpServletRequest request) {
+        List<Advertisement> advertisementList;
+        advertisementList = advertisementRepository.findAllByPublishedAndEstate_SubCategoryId(true,subcategoryId);
+        List<AdvertisementDTO> advertisementDTOS = new ArrayList<>();
+        for (Advertisement advertisement: advertisementList) {
+            AdvertisementDTO advertisementDTO = new AdvertisementDTO();
+            advertisementDTO.setAdvertisement(advertisement);
+            if(request.getUserPrincipal() != null) {
+                String email = UserUtil.getEmailFromRequest(request);
+                User user = userService.getByEmail(email);
+                FavoriteAd favoriteAd = favoriteAdService.getByAdvertisementAndUser(advertisement, user);
+                advertisementDTO.setFavoriteAd(favoriteAd);
+            }
+            AdvertisementPicture advertisementPicture
+                    = advertisementPictureService.getPrimaryByAdvertisementId(advertisement.getId());
+            advertisementDTO.setAdvertisementPicture(advertisementPicture);
+            advertisementDTOS.add(advertisementDTO);
+        }
+        return advertisementDTOS;
     }
 
 

@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.service;
 
+import com.stefanmilojevic.myRealEstate.dto.AdvertisementDTO;
 import com.stefanmilojevic.myRealEstate.model.Advertisement;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,4 +47,11 @@ public interface AdvertisementService {
      * @return List of <code>Advertisement</code>
      */
     List<Advertisement> getAllPublishedBySubCategoryId(int subcategoryId);
+
+    /**
+     * Get all published <code>AdvertisementDTO</code> of selected <code>SubCategory</code>
+     * @param subcategoryId id of <code>SubCategory</code>
+     * @return List of <code>Advertisement</code>
+     */
+    List<AdvertisementDTO> getAllPublishedDTOBySubCategoryId(int subcategoryId, HttpServletRequest request);
 }
