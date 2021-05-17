@@ -43,6 +43,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/subcategory/getAllByCategoryTitle/**").permitAll()
                 .antMatchers("/advertisement/getAllPublishedBySubCategoryId/**").permitAll()
                 .antMatchers("/advertisementPictures/getPrimaryByAdvertisementId/{advertisementId}/**").permitAll()
+                .antMatchers("/pictures/getByUserId/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();

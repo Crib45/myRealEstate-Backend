@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -31,8 +33,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         userRepository.save(user);
-        return null;
+        return "Success";
     }
 
     @Override
@@ -45,5 +48,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean comparePasswords(String password, String passwordTwo) {
         return passwordEncoder.matches(password,passwordTwo);
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userRepository.getOne(id);
+    }
+
+    @Override
+    public String save(User user) {
+        userRepository.save(user);
+        return "Success";
     }
 }

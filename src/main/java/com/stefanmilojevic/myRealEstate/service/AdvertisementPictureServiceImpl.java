@@ -61,8 +61,6 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
 
     @Override
     public AdvertisementPicture getPrimaryByAdvertisementId(int advertisementId) {
-//        AdvertisementPicture advertisementPicture;
-//        advertisementPicture = advertisementPictureRepository.findByPrimaryPicIsTrueAndAdvertisement_Id(advertisementId);
         return advertisementPictureRepository.findByPrimaryPicIsTrueAndAdvertisement_Id(advertisementId);
     }
 }

@@ -3,6 +3,7 @@ package com.stefanmilojevic.myRealEstate.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,9 +17,11 @@ public class Picture {
     private List<Category> categoryList;
     private String fileName;
     private String contentType;
+    private User user;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -93,12 +96,12 @@ public class Picture {
         Picture picture = (Picture) o;
         return id == picture.id && Objects.equals(title, picture.title)
                 && Objects.equals(caption, picture.caption)
-                && Objects.equals(imgBlob, picture.imgBlob);
+                && Arrays.equals(imgBlob, picture.imgBlob);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, caption, imgBlob);
+        return Objects.hash(id, title, caption, Arrays.hashCode(imgBlob));
     }
 
     @Override
@@ -107,9 +110,15 @@ public class Picture {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", caption='" + caption + '\'' +
-                ", imgBlob=" + imgBlob +
                 '}';
     }
 
+    @OneToOne(mappedBy = "picture")
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

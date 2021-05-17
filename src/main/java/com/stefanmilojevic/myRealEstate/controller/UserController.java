@@ -28,6 +28,11 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
+    @PostMapping()
+    public ResponseEntity<String> save(@RequestBody User user) {
+        return ResponseEntity.ok(userService.save(user));
+    }
+
     @RequestMapping("/login")
     public boolean login(@RequestBody User user) {
         User userCheck = userService.getByEmail(user.getEmail());
@@ -40,6 +45,11 @@ public class UserController {
     public ResponseEntity<User> getLoggedUser(HttpServletRequest request){
         String email = UserUtil.getEmailFromRequest(request);
         return ResponseEntity.ok(userService.getByEmail(email));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getById(@PathVariable Long id){
+        return ResponseEntity.ok(userService.getById(id));
     }
 
 

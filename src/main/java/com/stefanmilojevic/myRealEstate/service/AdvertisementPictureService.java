@@ -37,5 +37,10 @@ public interface AdvertisementPictureService {
      */
     AdvertisementPicture setPrimaryById(int advertisementId, int id);
 
+    /**
+     * Get Primary picture of advertisement
+     * @param advertisementId id of advertisement
+     * @return <code>AdvertisementPicture</code>
+     */
     AdvertisementPicture getPrimaryByAdvertisementId(int advertisementId);
 }

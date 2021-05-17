@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class User {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -33,14 +34,17 @@ public class User {
     @JsonIgnore
     private List<ProfileComments> profileCommentsById_0;
     private City city;
+    @JsonIgnore
+    private Picture picture;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -115,6 +119,16 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "picture_id", referencedColumnName = "id")
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,16 +151,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-//        result = 31 * result + (cityId != null ? cityId.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        return result;
+        return Objects.hash(id, firstName, lastName, email, phone, username, password, createdAt, advertCommentsById, advertisementsById, favoriteAds, sentMessages, receivedMessages, profileCommentsById, profileCommentsById_0, city, picture);
     }
 
     @OneToMany(mappedBy = "userByMadeBy")

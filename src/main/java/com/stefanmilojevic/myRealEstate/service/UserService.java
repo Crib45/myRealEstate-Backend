@@ -6,4 +6,6 @@ public interface UserService {
     String createUser(User user);
     User getByEmail(String email);
     boolean comparePasswords(String password, String passwordTwo);
+    User getById(Long id);
+    String save(User user);
 }
