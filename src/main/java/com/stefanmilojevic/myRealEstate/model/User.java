@@ -1,8 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -30,9 +28,9 @@ public class User {
     @JsonIgnore
     private List<Message> receivedMessages;
     @JsonIgnore
-    private List<ProfileComments> profileCommentsById;
+    private List<ProfileComments> profileCommentsMade;
     @JsonIgnore
-    private List<ProfileComments> profileCommentsById_0;
+    private List<ProfileComments> profileCommentsSent;
     private City city;
     @JsonIgnore
     private Picture picture;
@@ -151,7 +149,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, phone, username, password, createdAt, advertCommentsById, advertisementsById, favoriteAds, sentMessages, receivedMessages, profileCommentsById, profileCommentsById_0, city, picture);
+        return Objects.hash(id, firstName, lastName, email, phone, username, password, createdAt, advertCommentsById, advertisementsById, favoriteAds, sentMessages, receivedMessages, profileCommentsMade, profileCommentsSent, city, picture);
     }
 
     @OneToMany(mappedBy = "userByMadeBy")
@@ -199,22 +197,22 @@ public class User {
         this.receivedMessages = receivedMessages;
     }
 
-    @OneToMany(mappedBy = "userByMadeBy")
-    public List<ProfileComments> getProfileCommentsById() {
-        return profileCommentsById;
+    @OneToMany(mappedBy = "madeBy")
+    public List<ProfileComments> getProfileCommentsMade() {
+        return profileCommentsMade;
     }
 
-    public void setProfileCommentsById(List<ProfileComments> profileCommentsById) {
-        this.profileCommentsById = profileCommentsById;
+    public void setProfileCommentsMade(List<ProfileComments> profileCommentsById) {
+        this.profileCommentsMade = profileCommentsById;
     }
 
-    @OneToMany(mappedBy = "userByMadeFor")
-    public List<ProfileComments> getProfileCommentsById_0() {
-        return profileCommentsById_0;
+    @OneToMany(mappedBy = "madeFor")
+    public List<ProfileComments> getProfileCommentsSent() {
+        return profileCommentsSent;
     }
 
-    public void setProfileCommentsById_0(List<ProfileComments> profileCommentsById_0) {
-        this.profileCommentsById_0 = profileCommentsById_0;
+    public void setProfileCommentsSent(List<ProfileComments> profileCommentsById_0) {
+        this.profileCommentsSent = profileCommentsById_0;
     }
 
     @ManyToOne

@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String save(User user) {
+        if(user.getId() != null){
+            User oldUser = userRepository.getOne(user.getId());
+            if(oldUser.getPicture() != null) {
+                user.setPicture(oldUser.getPicture());
+            }
+        }
         userRepository.save(user);
         return "Success";
     }

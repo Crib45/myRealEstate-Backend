@@ -1,6 +1,5 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,15 +9,11 @@ import java.sql.Timestamp;
 @Table(name = "profile_comments", schema = "myrealestate", catalog = "")
 public class ProfileComments {
     private int id;
-    private Integer madeBy;
-    private Integer madeFor;
     private String comment;
     private Double grade;
     private Timestamp createdAt;
-    @JsonIgnore
-    private User userByMadeBy;
-    @JsonIgnore
-    private User userByMadeFor;
+    private User madeBy;
+    private User madeFor;
 
     @Id
     @Column(name = "id")
@@ -69,8 +64,6 @@ public class ProfileComments {
         ProfileComments that = (ProfileComments) o;
 
         if (id != that.id) return false;
-        if (madeBy != null ? !madeBy.equals(that.madeBy) : that.madeBy != null) return false;
-        if (madeFor != null ? !madeFor.equals(that.madeFor) : that.madeFor != null) return false;
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
         if (grade != null ? !grade.equals(that.grade) : that.grade != null) return false;
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
@@ -81,8 +74,6 @@ public class ProfileComments {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (madeBy != null ? madeBy.hashCode() : 0);
-        result = 31 * result + (madeFor != null ? madeFor.hashCode() : 0);
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
@@ -91,21 +82,33 @@ public class ProfileComments {
 
     @ManyToOne
     @JoinColumn(name = "made_by", referencedColumnName = "id")
-    public User getUserByMadeBy() {
-        return userByMadeBy;
+    public User getMadeBy() {
+        return madeBy;
     }
 
-    public void setUserByMadeBy(User userByMadeBy) {
-        this.userByMadeBy = userByMadeBy;
+    public void setMadeBy(User userByMadeBy) {
+        this.madeBy = userByMadeBy;
     }
 
     @ManyToOne
     @JoinColumn(name = "made_for", referencedColumnName = "id")
-    public User getUserByMadeFor() {
-        return userByMadeFor;
+    public User getMadeFor() {
+        return madeFor;
     }
 
-    public void setUserByMadeFor(User userByMadeFor) {
-        this.userByMadeFor = userByMadeFor;
+    public void setMadeFor(User userByMadeFor) {
+        this.madeFor = userByMadeFor;
+    }
+
+    @Override
+    public String toString() {
+        return "ProfileComments{" +
+                "id=" + id +
+                ", comment='" + comment + '\'' +
+                ", grade=" + grade +
+                ", createdAt=" + createdAt +
+                ", madeBy=" + madeBy +
+                ", madeFor=" + madeFor +
+                '}';
     }
 }

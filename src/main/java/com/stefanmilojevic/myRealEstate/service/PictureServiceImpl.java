@@ -62,8 +62,15 @@ public class PictureServiceImpl implements PictureService {
         User user = userService.getByEmail(email);
         Picture picture = createPicture(file);
         picture.setUser(user);
-        Picture savedPicture = pictureRepository.saveAndFlush(picture);
-        user.setPicture(picture);
+        if(user.getPicture() == null) {
+            user.setPicture(picture);
+        }
+        else {
+            user.getPicture().setImgBlob(picture.getImgBlob());
+            user.getPicture().setTitle(picture.getTitle());
+            user.getPicture().setFileName(picture.getFileName());
+            user.getPicture().setContentType(picture.getContentType());
+        }
         userService.save(user);
         return "Success";
     }
