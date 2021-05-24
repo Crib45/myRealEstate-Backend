@@ -12,6 +12,7 @@ import java.util.List;
 public class Utility {
     private int id;
     private String name;
+    private String icon;
     @JsonIgnore
     private List<SubCategory> subCategory;
     @JsonIgnore
@@ -75,5 +76,15 @@ public class Utility {
 
     public void setUtilityEstatesById(List<UtilityEstate> utilityEstatesById) {
         this.utilityEstatesById = utilityEstatesById;
+    }
+
+    @Basic
+    @Column(name = "icon")
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

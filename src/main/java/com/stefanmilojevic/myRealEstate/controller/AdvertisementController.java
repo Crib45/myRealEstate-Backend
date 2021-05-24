@@ -45,4 +45,9 @@ public class AdvertisementController {
     public ResponseEntity<List<AdvertisementDTO>> getAllAdvertDTO(@PathVariable int subcategoryId, HttpServletRequest request) {
         return ResponseEntity.ok(advertisementService.getAllPublishedDTOBySubCategoryId(subcategoryId, request));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Advertisement> getById(@PathVariable int id) {
+        return ResponseEntity.ok(advertisementService.getById(id));
+    }
 }

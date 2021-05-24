@@ -1565,39 +1565,43 @@ utility_id</ColNames>
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="427" parent="296" name="PRIMARY">
+    <column id="427" parent="296" name="icon">
+      <Position>3</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <key id="428" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="428" parent="297" name="id">
+    <column id="429" parent="297" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="429" parent="297" name="value">
+    <column id="430" parent="297" name="value">
       <Position>2</Position>
       <DataType>decimal(10)|0s</DataType>
     </column>
-    <column id="430" parent="297" name="estate_id">
+    <column id="431" parent="297" name="estate_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="431" parent="297" name="utility_id">
+    <column id="432" parent="297" name="utility_id">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="432" parent="297" name="utility_id">
+    <index id="433" parent="297" name="utility_id">
       <ColNames>utility_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="433" parent="297" name="PRIMARY">
+    <key id="434" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="434" parent="297" name="utility_estate_ibfk_2">
+    <foreign-key id="435" parent="297" name="utility_estate_ibfk_2">
       <ColNames>utility_id</ColNames>
       <RefTableName>utility</RefTableName>
       <RefColNames>id</RefColNames>
