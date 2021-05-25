@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EstateRepository extends JpaRepository<Estate, Long> {
-    Estate findById(int id);
+//    Estate findById(Long id);
 }

@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AdvertisementPictureServiceImpl implements AdvertisementPictureService {
@@ -25,12 +24,12 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
     }
 
     @Override
-    public List<AdvertisementPicture> getAllByAdvertisementId(int advertisementId) {
+    public List<AdvertisementPicture> getAllByAdvertisementId(Long advertisementId) {
         return advertisementPictureRepository.findAllByAdvertisement_Id(advertisementId);
     }
 
     @Override
-    public String save(MultipartFile file, int advertisementId) throws IOException {
+    public String save(MultipartFile file, Long advertisementId) throws IOException {
         Advertisement advertisement = advertisementService.getById(advertisementId);
         AdvertisementPicture advertisementPicture = new AdvertisementPicture();
         advertisementPicture.setFileName(file.getOriginalFilename());
@@ -49,7 +48,7 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
     }
 
     @Override
-    public AdvertisementPicture setPrimaryById(int advertisementId, int id) {
+    public AdvertisementPicture setPrimaryById(Long advertisementId, int id) {
         List<AdvertisementPicture> advertisementPictureList;
         advertisementPictureList = advertisementPictureRepository.findAllByAdvertisement_Id(advertisementId);
         for(AdvertisementPicture advertisementPicture : advertisementPictureList){
@@ -60,7 +59,7 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
     }
 
     @Override
-    public AdvertisementPicture getPrimaryByAdvertisementId(int advertisementId) {
+    public AdvertisementPicture getPrimaryByAdvertisementId(Long advertisementId) {
         return advertisementPictureRepository.findByPrimaryPicIsTrueAndAdvertisement_Id(advertisementId);
     }
 }

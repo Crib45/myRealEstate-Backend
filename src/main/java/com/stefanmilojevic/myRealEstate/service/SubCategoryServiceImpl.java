@@ -13,6 +13,12 @@ public class SubCategoryServiceImpl implements SubCategoryService{
 
     private final SubCategoryRepository subCategoryRepository;
     private final CategoryService categoryService;
+    private AdvertisementService advertisementService;
+
+    @Autowired
+    private void setAdvertisementService(AdvertisementService advertisementService) {
+        this.advertisementService = advertisementService;
+    }
 
     @Autowired
     private SubCategoryServiceImpl(SubCategoryRepository subCategoryRepository, CategoryService categoryService) {
@@ -30,5 +36,10 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     public List<SubCategory> getAllByCategoryId(int categoryId) {
         Category category = categoryService.getById(categoryId);
         return subCategoryRepository.findAllByCategory(category);
+    }
+
+    @Override
+    public SubCategory getByAdvertisementId(Long id) {
+        return advertisementService.getById(id).getEstate().getSubCategory();
     }
 }

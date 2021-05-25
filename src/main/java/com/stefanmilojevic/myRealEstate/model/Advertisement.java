@@ -8,10 +8,11 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Advertisement {
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private Integer price;
@@ -32,11 +33,11 @@ public class Advertisement {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -123,37 +124,9 @@ public class Advertisement {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Advertisement that = (Advertisement) o;
 
-        if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (expireDate != null ? !expireDate.equals(that.expireDate) : that.expireDate != null) return false;
-        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
-        if (editedAt != null ? !editedAt.equals(that.editedAt) : that.editedAt != null) return false;
-//        if (ownerId != null ? !ownerId.equals(that.ownerId) : that.ownerId != null) return false;
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (expireDate != null ? expireDate.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        result = 31 * result + (editedAt != null ? editedAt.hashCode() : 0);
-//        result = 31 * result + (ownerId != null ? ownerId.hashCode() : 0);
-        return result;
-    }
 
     @OneToMany(mappedBy = "advertisementByAdvertisementId")
     public List<AdvertComments> getAdvertCommentsById() {
@@ -230,5 +203,18 @@ public class Advertisement {
                 ", published=" + published +
                 ", advertisementPictures=" + advertisementPictures +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Advertisement that = (Advertisement) o;
+        return id.equals(that.id) && title.equals(that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(finished, that.finished) && Objects.equals(expireDate, that.expireDate) && Objects.equals(createdAt, that.createdAt) && Objects.equals(editedAt, that.editedAt) && Objects.equals(advertCommentsById, that.advertCommentsById) && Objects.equals(owner, that.owner) && Objects.equals(estate, that.estate) && Objects.equals(favoriteAds, that.favoriteAds) && Objects.equals(published, that.published) && Objects.equals(advertisementPictures, that.advertisementPictures);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, price, finished, expireDate, createdAt, editedAt, advertCommentsById, owner, estate, favoriteAds, published, advertisementPictures);
     }
 }

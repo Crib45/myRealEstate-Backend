@@ -25,21 +25,21 @@ public interface AdvertisementService {
      * Deletes selected advertisement from db
      * @param id id of Advertisement for deleting
      */
-    String delete(int id);
+    String delete(Long id);
 
     /**
      * Returns Advertisement by id
      * @param id id of Advertisement
      * @return Advertisement
      */
-    Advertisement getById(int id);
+    Advertisement getById(Long id);
 
     /**
      * Changes publish status of given advertisement to true
      * @param id Id of Advertisement
      * @return Advertisement
      */
-    Advertisement publish(int id);
+    Advertisement publish(Long id);
 
     /**
      * Get all published <code>Advertisements</code> of selected <code>SubCategory</code>

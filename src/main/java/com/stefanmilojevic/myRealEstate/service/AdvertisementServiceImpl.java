@@ -2,7 +2,6 @@ package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.dto.AdvertisementDTO;
 import com.stefanmilojevic.myRealEstate.model.*;
-import com.stefanmilojevic.myRealEstate.repository.AdvertisementPictureRepository;
 import com.stefanmilojevic.myRealEstate.repository.AdvertisementRepository;
 import com.stefanmilojevic.myRealEstate.repository.EstateRepository;
 import com.stefanmilojevic.myRealEstate.util.UserUtil;
@@ -50,11 +49,13 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
         advertisement.setOwner(user);
         if(advertisement.getId() != 0) {
-            Advertisement advertisementForSave = advertisementRepository.findById(advertisement.getId());
+            Advertisement advertisementForSave = advertisementRepository.findById(advertisement.getId()).orElse(null);
             advertisement.setEditedAt(new Timestamp(System.currentTimeMillis()));
+            assert advertisementForSave != null;
             advertisementForSave.setEditedAt(advertisement.getEditedAt());
             advertisementForSave.setTitle(advertisement.getTitle());
-            Estate estate = estateRepository.findById(advertisementForSave.getId());
+            Estate estate = estateRepository.findById(advertisementForSave.getId()).orElse(null);
+            assert estate != null;
             estate.setCity(advertisement.getEstate().getCity());
             estate.setSize(advertisement.getEstate().getSize());
             estate.setSubCategory(advertisement.getEstate().getSubCategory());
@@ -78,20 +79,22 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
-    public String delete(int id) {
-        Advertisement advertisement = advertisementRepository.findById(id);
+    public String delete(Long id) {
+        Advertisement advertisement = advertisementRepository.findById(id).orElse(null);
+        assert advertisement != null;
         advertisementRepository.delete(advertisement);
         return "Success";
     }
 
     @Override
-    public Advertisement getById(int id) {
-        return advertisementRepository.findById(id);
+    public Advertisement getById(Long id) {
+        return advertisementRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Advertisement publish(int id) {
-        Advertisement advertisement = advertisementRepository.findById(id);
+    public Advertisement publish(Long id) {
+        Advertisement advertisement = advertisementRepository.findById(id).orElse(null);
+        assert advertisement != null;
         advertisement.setPublished(true);
         return advertisementRepository.save(advertisement);
     }

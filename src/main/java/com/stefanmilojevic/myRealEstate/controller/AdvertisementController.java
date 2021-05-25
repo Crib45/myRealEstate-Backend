@@ -32,12 +32,12 @@ public class AdvertisementController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable int id) {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
         return ResponseEntity.ok(advertisementService.delete(id));
     }
 
     @PutMapping("/publish/{id}")
-    public ResponseEntity<Advertisement> publish(@PathVariable int id) {
+    public ResponseEntity<Advertisement> publish(@PathVariable Long id) {
         return ResponseEntity.ok(advertisementService.publish(id));
     }
 
@@ -47,7 +47,7 @@ public class AdvertisementController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Advertisement> getById(@PathVariable int id) {
+    public ResponseEntity<Advertisement> getById(@PathVariable Long id) {
         return ResponseEntity.ok(advertisementService.getById(id));
     }
 }

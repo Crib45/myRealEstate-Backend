@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Long> {
     List<Advertisement> findAllByOwner(User user);
-    Advertisement findById(int id);
+//    Advertisement findById(Long id);
     List<Advertisement> findAllByPublishedAndEstate_SubCategoryId(Boolean published,int subcategoryId);
 }

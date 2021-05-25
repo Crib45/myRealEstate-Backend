@@ -1,6 +1,5 @@
 package com.stefanmilojevic.myRealEstate.service;
 
-import com.stefanmilojevic.myRealEstate.model.Advertisement;
 import com.stefanmilojevic.myRealEstate.model.AdvertisementPicture;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,14 +12,14 @@ public interface AdvertisementPictureService {
      * @param advertisementId id of advertisement
      * @return List of AdvertisementPicture type
      */
-    List<AdvertisementPicture> getAllByAdvertisementId(int advertisementId);
+    List<AdvertisementPicture> getAllByAdvertisementId(Long advertisementId);
 
     /**
      * Saves AdvertisementPicture
      * @param file MultipartFile
      * @return Success message
      */
-    String save(MultipartFile file, int advertisementId) throws IOException;
+    String save(MultipartFile file, Long advertisementId) throws IOException;
 
     /**
      * Delete Advertisement picture by id
@@ -35,12 +34,12 @@ public interface AdvertisementPictureService {
      * @param id Id of Advertisement picture to be set to primary
      * @return AdvertisementPicture primary object
      */
-    AdvertisementPicture setPrimaryById(int advertisementId, int id);
+    AdvertisementPicture setPrimaryById(Long advertisementId, int id);
 
     /**
      * Get Primary picture of advertisement
      * @param advertisementId id of advertisement
      * @return <code>AdvertisementPicture</code>
      */
-    AdvertisementPicture getPrimaryByAdvertisementId(int advertisementId);
+    AdvertisementPicture getPrimaryByAdvertisementId(Long advertisementId);
 }

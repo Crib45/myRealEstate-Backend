@@ -1,8 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,7 +8,7 @@ import java.util.List;
 
 @Entity
 public class Estate {
-    private int id;
+    private Long id;
     private Integer size;
     private Timestamp createdAt;
     @JsonIgnore
@@ -22,11 +20,11 @@ public class Estate {
 
     @Id
     @Column(name = "advertisement_id")
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,26 +49,7 @@ public class Estate {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Estate estate = (Estate) o;
-
-        if (id != estate.id) return false;
-        if (size != null ? !size.equals(estate.size) : estate.size != null) return false;
-        if (createdAt != null ? !createdAt.equals(estate.createdAt) : estate.createdAt != null) return false;
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        return result;
-    }
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
