@@ -152,7 +152,7 @@ public class User {
         return Objects.hash(id, firstName, lastName, email, phone, username, password, createdAt, advertCommentsById, advertisementsById, favoriteAds, sentMessages, receivedMessages, profileCommentsMade, profileCommentsSent, city, picture);
     }
 
-    @OneToMany(mappedBy = "userByMadeBy")
+    @OneToMany(mappedBy = "madeBy")
     public List<AdvertComments> getAdvertCommentsById() {
         return advertCommentsById;
     }

@@ -48,7 +48,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     public Advertisement save(Advertisement advertisement, HttpServletRequest request) {
         User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
         advertisement.setOwner(user);
-        if(advertisement.getId() != 0) {
+        if(advertisement.getId() != null) {
             Advertisement advertisementForSave = advertisementRepository.findById(advertisement.getId()).orElse(null);
             advertisement.setEditedAt(new Timestamp(System.currentTimeMillis()));
             assert advertisementForSave != null;

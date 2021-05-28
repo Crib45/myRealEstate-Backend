@@ -1,6 +1,5 @@
 package com.stefanmilojevic.myRealEstate.controller;
 
-import com.stefanmilojevic.myRealEstate.model.User;
 import com.stefanmilojevic.myRealEstate.model.Utility;
 import com.stefanmilojevic.myRealEstate.service.UtilityService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,16 +1,14 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Utility {
-    private int id;
+    private Long id;
     private String name;
     private String icon;
     @JsonIgnore
@@ -20,11 +18,12 @@ public class Utility {
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,25 +37,7 @@ public class Utility {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Utility utility = (Utility) o;
-
-        if (id != utility.id) return false;
-        if (name != null ? !name.equals(utility.name) : utility.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 
 //    @ManyToOne
 //    @JoinColumn(name = "sub_category_id", referencedColumnName = "id")
@@ -69,7 +50,7 @@ public class Utility {
         this.subCategory = subCategory;
     }
 
-    @OneToMany(mappedBy = "utilityByUtilityId")
+    @OneToMany(mappedBy = "utility")
     public List<UtilityEstate> getUtilityEstatesById() {
         return utilityEstatesById;
     }
@@ -86,5 +67,18 @@ public class Utility {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Utility utility = (Utility) o;
+        return id.equals(utility.id) && Objects.equals(name, utility.name) && Objects.equals(icon, utility.icon) && Objects.equals(subCategory, utility.subCategory) && Objects.equals(utilityEstatesById, utility.utilityEstatesById);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, icon, subCategory, utilityEstatesById);
     }
 }

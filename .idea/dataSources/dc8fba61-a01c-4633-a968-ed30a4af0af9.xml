@@ -1582,7 +1582,7 @@ utility_id</ColNames>
     </column>
     <column id="430" parent="297" name="value">
       <Position>2</Position>
-      <DataType>decimal(10)|0s</DataType>
+      <DataType>tinyint(1)|0s</DataType>
     </column>
     <column id="431" parent="297" name="estate_id">
       <Position>3</Position>
@@ -1592,16 +1592,20 @@ utility_id</ColNames>
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="433" parent="297" name="utility_id">
+    <column id="433" parent="297" name="description">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <index id="434" parent="297" name="utility_id">
       <ColNames>utility_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="434" parent="297" name="PRIMARY">
+    <key id="435" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="435" parent="297" name="utility_estate_ibfk_2">
+    <foreign-key id="436" parent="297" name="utility_estate_ibfk_2">
       <ColNames>utility_id</ColNames>
       <RefTableName>utility</RefTableName>
       <RefColNames>id</RefColNames>

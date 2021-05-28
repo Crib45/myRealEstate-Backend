@@ -21,7 +21,7 @@ public class Advertisement {
     private Timestamp createdAt;
     private Timestamp editedAt;
     @JsonIgnore
-    private List<AdvertComments> advertCommentsById;
+    private List<AdvertComments> advertComments;
     private User owner;
     private Estate estate;
     @JsonIgnore
@@ -128,13 +128,13 @@ public class Advertisement {
 
 
 
-    @OneToMany(mappedBy = "advertisementByAdvertisementId")
-    public List<AdvertComments> getAdvertCommentsById() {
-        return advertCommentsById;
+    @OneToMany(mappedBy = "advertisement")
+    public List<AdvertComments> getAdvertComments() {
+        return advertComments;
     }
 
-    public void setAdvertCommentsById(List<AdvertComments> advertCommentsById) {
-        this.advertCommentsById = advertCommentsById;
+    public void setAdvertComments(List<AdvertComments> advertComments) {
+        this.advertComments = advertComments;
     }
 
     @ManyToOne
@@ -196,7 +196,7 @@ public class Advertisement {
                 ", expireDate=" + expireDate +
                 ", createdAt=" + createdAt +
                 ", editedAt=" + editedAt +
-                ", advertCommentsById=" + advertCommentsById +
+                ", advertCommentsById=" + advertComments +
                 ", owner=" + owner +
                 ", estate=" + estate +
                 ", favoriteAdsById=" + favoriteAds +
@@ -210,11 +210,11 @@ public class Advertisement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Advertisement that = (Advertisement) o;
-        return id.equals(that.id) && title.equals(that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(finished, that.finished) && Objects.equals(expireDate, that.expireDate) && Objects.equals(createdAt, that.createdAt) && Objects.equals(editedAt, that.editedAt) && Objects.equals(advertCommentsById, that.advertCommentsById) && Objects.equals(owner, that.owner) && Objects.equals(estate, that.estate) && Objects.equals(favoriteAds, that.favoriteAds) && Objects.equals(published, that.published) && Objects.equals(advertisementPictures, that.advertisementPictures);
+        return id.equals(that.id) && title.equals(that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(finished, that.finished) && Objects.equals(expireDate, that.expireDate) && Objects.equals(createdAt, that.createdAt) && Objects.equals(editedAt, that.editedAt) && Objects.equals(advertComments, that.advertComments) && Objects.equals(owner, that.owner) && Objects.equals(estate, that.estate) && Objects.equals(favoriteAds, that.favoriteAds) && Objects.equals(published, that.published) && Objects.equals(advertisementPictures, that.advertisementPictures);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, price, finished, expireDate, createdAt, editedAt, advertCommentsById, owner, estate, favoriteAds, published, advertisementPictures);
+        return Objects.hash(id, title, description, price, finished, expireDate, createdAt, editedAt, advertComments, owner, estate, favoriteAds, published, advertisementPictures);
     }
 }

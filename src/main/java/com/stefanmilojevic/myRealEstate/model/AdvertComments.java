@@ -1,8 +1,6 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -12,12 +10,11 @@ import java.util.List;
 @Table(name = "advert_comments", schema = "myrealestate", catalog = "")
 public class AdvertComments {
     private int id;
-    private Integer madeBy;
     private Integer quote;
     private String comment;
     private Timestamp createdAt;
-    private User userByMadeBy;
-    private Advertisement advertisementByAdvertisementId;
+    private User madeBy;
+    private Advertisement advertisement;
     private AdvertComments advertCommentsByQuote;
     // Replies to advert-comment
     @JsonIgnore
@@ -85,22 +82,22 @@ public class AdvertComments {
 
     @ManyToOne
     @JoinColumn(name = "made_by", referencedColumnName = "id")
-    public User getUserByMadeBy() {
-        return userByMadeBy;
+    public User getMadeBy() {
+        return madeBy;
     }
 
-    public void setUserByMadeBy(User userByMadeBy) {
-        this.userByMadeBy = userByMadeBy;
+    public void setMadeBy(User madeBy) {
+        this.madeBy = madeBy;
     }
 
     @ManyToOne
     @JoinColumn(name = "advertisement_id", referencedColumnName = "id")
-    public Advertisement getAdvertisementByAdvertisementId() {
-        return advertisementByAdvertisementId;
+    public Advertisement getAdvertisement() {
+        return advertisement;
     }
 
-    public void setAdvertisementByAdvertisementId(Advertisement advertisementByAdvertisementId) {
-        this.advertisementByAdvertisementId = advertisementByAdvertisementId;
+    public void setAdvertisement(Advertisement advertisement) {
+        this.advertisement = advertisement;
     }
 
     @ManyToOne
