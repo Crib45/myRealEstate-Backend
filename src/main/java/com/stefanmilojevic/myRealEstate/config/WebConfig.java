@@ -49,7 +49,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pictures/getByUserId/**").permitAll()
                 .antMatchers("/profileComments/commentedOn/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/utilityEstate/getAllByAdvertId/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/getAllByAdvertId/getAllByAdvertId/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/advertComments/getAllByAdvertId/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();

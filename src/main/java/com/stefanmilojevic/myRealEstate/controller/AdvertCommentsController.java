@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequestMapping("/advertComments")
@@ -20,8 +21,8 @@ public class AdvertCommentsController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> save(@RequestBody AdvertComments advertComments) {
-        return ResponseEntity.ok(advertCommentsService.save(advertComments));
+    public ResponseEntity<String> save(@RequestBody AdvertComments advertComments, HttpServletRequest request) {
+        return ResponseEntity.ok(advertCommentsService.save(advertComments, request));
     }
 
     @GetMapping("/getAllByAdvertId/{advertId}")
