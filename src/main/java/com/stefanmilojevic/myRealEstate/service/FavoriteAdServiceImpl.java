@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class FavoriteAdServiceImpl implements FavoriteAdService {
@@ -48,5 +49,22 @@ public class FavoriteAdServiceImpl implements FavoriteAdService {
     public String delete(Long id) {
         favoriteAdRepository.deleteById(id);
         return "Success";
+    }
+
+    @Override
+    public List<FavoriteAd> getAllForLogged(HttpServletRequest request) {
+        String email = UserUtil.getEmailFromRequest(request);
+        User user = userService.getByEmail(email);
+        return favoriteAdRepository.findAllByUser(user);
+    }
+
+    @Override
+    public FavoriteAd getByAdvertIdForLogged(Long advertId, HttpServletRequest request) {
+        String email = UserUtil.getEmailFromRequest(request);
+        User user = userService.getByEmail(email);
+        FavoriteAd favoriteAd = favoriteAdRepository.findByUserAndAdvertisement_Id(user, advertId);
+        favoriteAd.setLastChecked(new Timestamp(System.currentTimeMillis()));
+        favoriteAdRepository.saveAndFlush(favoriteAd);
+        return favoriteAd;
     }
 }

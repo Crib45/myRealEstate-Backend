@@ -5,6 +5,7 @@ import com.stefanmilojevic.myRealEstate.model.FavoriteAd;
 import com.stefanmilojevic.myRealEstate.model.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface FavoriteAdService {
     /**
@@ -23,5 +24,25 @@ public interface FavoriteAdService {
      */
     FavoriteAd save(Advertisement advertisement, HttpServletRequest request);
 
+    /**
+     * Delete given <code>FavoriteAd</code> entry
+     * @param id id of <code>FavoriteAd</code>
+     * @return Success message string
+     */
     String delete(Long id);
+
+    /**
+     * Returns list of <code>FavoriteAd</code> by logged user
+     * @param request <code>HttpServletRequest</code>
+     * @return List of <code>FavoriteAd</code>
+     */
+    List<FavoriteAd> getAllForLogged(HttpServletRequest request);
+
+    /**
+     * Returns <code>FavoriteAd</code> by logged <code>User</code> and id of <code>Advertisement</code>
+     * @param advertId id of <code>Advertisement</code>
+     * @param request <code>HttpServletRequest</code>
+     * @return <code>FavoriteAd</code>
+     */
+    FavoriteAd getByAdvertIdForLogged(Long advertId, HttpServletRequest request);
 }
