@@ -34,6 +34,8 @@ public class User {
     private City city;
     @JsonIgnore
     private Picture picture;
+    @JsonIgnore
+    private List<SavedFilter> savedFilters;
 
     @Id
     @Column(name = "id")
@@ -228,6 +230,15 @@ public class User {
     @Override
     public String toString() {
         return "id="+id;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<SavedFilter> getSavedFilters() {
+        return savedFilters;
+    }
+
+    public void setSavedFilters(List<SavedFilter> savedFilters) {
+        this.savedFilters = savedFilters;
     }
 }
 

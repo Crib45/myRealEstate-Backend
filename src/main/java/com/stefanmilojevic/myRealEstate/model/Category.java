@@ -14,6 +14,8 @@ public class Category {
     private Picture picture;
     @JsonIgnore
     private List<SubCategory> subCategories;
+    @JsonIgnore
+    private List<SavedFilter> savedFilters;
 
     @Id
     @Column(name = "id")
@@ -86,5 +88,14 @@ public class Category {
 
     public void setPicture(Picture picture) {
         this.picture = picture;
+    }
+
+    @OneToMany(mappedBy = "category")
+    public List<SavedFilter> getSavedFilters() {
+        return savedFilters;
+    }
+
+    public void setSavedFilters(List<SavedFilter> savedFilters) {
+        this.savedFilters = savedFilters;
     }
 }
