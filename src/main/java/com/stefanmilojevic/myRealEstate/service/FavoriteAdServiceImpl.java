@@ -63,8 +63,10 @@ public class FavoriteAdServiceImpl implements FavoriteAdService {
         String email = UserUtil.getEmailFromRequest(request);
         User user = userService.getByEmail(email);
         FavoriteAd favoriteAd = favoriteAdRepository.findByUserAndAdvertisement_Id(user, advertId);
-        favoriteAd.setLastChecked(new Timestamp(System.currentTimeMillis()));
-        favoriteAdRepository.saveAndFlush(favoriteAd);
+        if(favoriteAd != null) {
+            favoriteAd.setLastChecked(new Timestamp(System.currentTimeMillis()));
+            favoriteAdRepository.saveAndFlush(favoriteAd);
+        }
         return favoriteAd;
     }
 }

@@ -1,27 +1,28 @@
 package com.stefanmilojevic.myRealEstate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 public class Message {
-    private int id;
+    private Long id;
     private String content;
     private Boolean seen;
     private Timestamp createdAt;
-    private User userBySender;
-    private User userByReceiver;
+    private User sender;
+    private User receiver;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,45 +58,49 @@ public class Message {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Message message = (Message) o;
-
-        if (id != message.id) return false;
-        if (content != null ? !content.equals(message.content) : message.content != null) return false;
-        if (createdAt != null ? !createdAt.equals(message.createdAt) : message.createdAt != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        return result;
-    }
 
     @ManyToOne
     @JoinColumn(name = "sender", referencedColumnName = "id")
-    public User getUserBySender() {
-        return userBySender;
+    public User getSender() {
+        return sender;
     }
 
-    public void setUserBySender(User userBySender) {
-        this.userBySender = userBySender;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     @ManyToOne
     @JoinColumn(name = "receiver", referencedColumnName = "id")
-    public User getUserByReceiver() {
-        return userByReceiver;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setUserByReceiver(User userByReceiver) {
-        this.userByReceiver = userByReceiver;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return id.equals(message.id) && Objects.equals(content, message.content) && Objects.equals(seen, message.seen) && Objects.equals(createdAt, message.createdAt) && Objects.equals(sender, message.sender) && Objects.equals(receiver, message.receiver);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, content, seen, createdAt, sender, receiver);
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", seen=" + seen +
+                ", createdAt=" + createdAt +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                '}';
     }
 }

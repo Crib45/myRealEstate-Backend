@@ -181,7 +181,7 @@ public class User {
         this.favoriteAds = favoriteAds;
     }
 
-    @OneToMany(mappedBy = "userBySender")
+    @OneToMany(mappedBy = "sender")
     public List<Message> getSentMessages() {
         return sentMessages;
     }
@@ -190,7 +190,7 @@ public class User {
         this.sentMessages = sentMessages;
     }
 
-    @OneToMany(mappedBy = "userByReceiver")
+    @OneToMany(mappedBy = "receiver")
     public List<Message> getReceivedMessages() {
         return receivedMessages;
     }
