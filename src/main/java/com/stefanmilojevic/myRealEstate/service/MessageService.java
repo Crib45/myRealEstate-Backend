@@ -21,5 +21,17 @@ public interface MessageService {
      */
     List<Message> save(Message message, HttpServletRequest request);
 
+    /**
+     * Sets seen to true for all <code>Message</code> in list
+     * @param messages List of <code>Message</code>
+     * @return Success String
+     */
     String markAsSeen(List<Message> messages);
+
+    /**
+     * Returns number of messages not seen by logged <code>User</code>
+     * @param request <code>HttpServletRequest</code>
+     * @return <code>int</code> Number of messages not seen
+     */
+    Integer getNumOfNotSeen(HttpServletRequest request);
 }

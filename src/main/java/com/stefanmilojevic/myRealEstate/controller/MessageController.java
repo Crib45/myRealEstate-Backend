@@ -1,7 +1,6 @@
 package com.stefanmilojevic.myRealEstate.controller;
 
 import com.stefanmilojevic.myRealEstate.model.Message;
-import com.stefanmilojevic.myRealEstate.model.SavedFilter;
 import com.stefanmilojevic.myRealEstate.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +33,10 @@ public class MessageController {
     @PutMapping("markAsSeen")
     public ResponseEntity<String> save(@RequestBody List<Message> messages) {
         return ResponseEntity.ok(messageService.markAsSeen(messages));
+    }
+
+    @GetMapping("/getNotSeenNum")
+    public ResponseEntity<Integer> getNumOfNotSeen(HttpServletRequest request) {
+        return ResponseEntity.ok(messageService.getNumOfNotSeen(request));
     }
 }

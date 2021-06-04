@@ -27,6 +27,7 @@ public class Advertisement {
     @JsonIgnore
     private List<FavoriteAd> favoriteAds;
     private Boolean published;
+    private Timestamp commentsCheckedAt;
     @JsonIgnore
     private List<AdvertisementPicture> advertisementPictures;
 
@@ -123,10 +124,15 @@ public class Advertisement {
         this.editedAt = editedAt;
     }
 
+    @Basic
+    @Column(name = "comments_checked_at")
+    public Timestamp getCommentsCheckedAt() {
+        return commentsCheckedAt;
+    }
 
-
-
-
+    public void setCommentsCheckedAt(Timestamp commentsCheckedAt) {
+        this.commentsCheckedAt = commentsCheckedAt;
+    }
 
     @OneToMany(mappedBy = "advertisement")
     public List<AdvertComments> getAdvertComments() {

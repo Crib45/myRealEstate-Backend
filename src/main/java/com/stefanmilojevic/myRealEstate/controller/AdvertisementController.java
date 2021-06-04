@@ -41,6 +41,11 @@ public class AdvertisementController {
         return ResponseEntity.ok(advertisementService.publish(id));
     }
 
+    @PutMapping("/updateCommentsCheckedAt")
+    public ResponseEntity<String> updateCommentsCheckedAt(@RequestBody Advertisement advertisement) {
+        return ResponseEntity.ok(advertisementService.updateCommentsCheckedAt(advertisement));
+    }
+
     @GetMapping("/getAllPublishedBySubCategoryId/{subcategoryId}")
     public ResponseEntity<List<AdvertisementDTO>> getAllAdvertDTO(@PathVariable int subcategoryId, HttpServletRequest request) {
         return ResponseEntity.ok(advertisementService.getAllPublishedDTOBySubCategoryId(subcategoryId, request));

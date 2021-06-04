@@ -53,4 +53,12 @@ public class MessageServiceImpl implements MessageService {
         messageRepository.saveAll(messages);
         return "Success";
     }
+
+    @Override
+    public Integer getNumOfNotSeen(HttpServletRequest request) {
+        String email = UserUtil.getEmailFromRequest(request);
+        User user = userService.getByEmail(email);
+        List<Message> messages = messageRepository.findAllByReceiverAndSeen(user, false);
+        return messages.size();
+    }
 }

@@ -126,5 +126,12 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         return advertisementDTOS;
     }
 
+    @Override
+    public String updateCommentsCheckedAt(Advertisement advertisement) {
+        advertisement.setCommentsCheckedAt(new Timestamp(System.currentTimeMillis()));
+        advertisementRepository.save(advertisement);
+        return "Success";
+    }
+
 
 }

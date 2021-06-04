@@ -54,4 +54,8 @@ public interface AdvertisementService {
      * @return List of <code>Advertisement</code>
      */
     List<AdvertisementDTO> getAllPublishedDTOBySubCategoryId(int subcategoryId, HttpServletRequest request);
+
+    //TODO update CommentsCheckedAt date controller
+
+    String updateCommentsCheckedAt(Advertisement advertisement);
 }
