@@ -19,4 +19,10 @@ public interface ProfileCommentsService {
      * @return List of <code>ProfileComments</code> after saving
      */
     List<ProfileComments> save(ProfileComments profileComments, HttpServletRequest request);
+
+    /**
+     * Update last time user saw profile comments
+     * @param request <code>HttpServletRequest</code>
+     */
+    String updateSeen(HttpServletRequest request);
 }

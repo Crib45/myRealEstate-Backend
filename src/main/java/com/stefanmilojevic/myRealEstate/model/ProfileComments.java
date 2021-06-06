@@ -1,6 +1,7 @@
 package com.stefanmilojevic.myRealEstate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ public class ProfileComments {
     private Timestamp createdAt;
     private User madeBy;
     private User madeFor;
+    private Boolean seen = false;
 
     @Id
     @Column(name = "id")
@@ -23,6 +25,17 @@ public class ProfileComments {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Basic
+    @Column(name = "seen",nullable = false, columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    public Boolean getSeen() {
+        return seen;
+    }
+
+    public void setSeen(Boolean seen) {
+        this.seen = seen;
     }
 
 

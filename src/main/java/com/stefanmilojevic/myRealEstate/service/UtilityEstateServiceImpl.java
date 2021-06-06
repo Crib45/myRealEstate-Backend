@@ -1,5 +1,6 @@
 package com.stefanmilojevic.myRealEstate.service;
 
+import com.stefanmilojevic.myRealEstate.model.Advertisement;
 import com.stefanmilojevic.myRealEstate.model.Estate;
 import com.stefanmilojevic.myRealEstate.model.Utility;
 import com.stefanmilojevic.myRealEstate.model.UtilityEstate;
@@ -17,6 +18,12 @@ public class UtilityEstateServiceImpl implements UtilityEstateService {
 
     private final UtilityService utilityService;
     private final EstateService estateService;
+    private AdvertisementService advertisementService;
+
+    @Autowired
+    void setAdvertisementService(AdvertisementService advertisementService) {
+        this.advertisementService = advertisementService;
+    }
 
     @Autowired
     public UtilityEstateServiceImpl(UtilityEstateRepository utilityEstateRepository,
@@ -48,6 +55,10 @@ public class UtilityEstateServiceImpl implements UtilityEstateService {
     @Override
     public String saveAll(List<UtilityEstate> utilityEstateList) {
         utilityEstateRepository.saveAll(utilityEstateList);
+        if(utilityEstateList.get(0) != null) {
+            Estate estate = utilityEstateList.get(0).getEstate();
+            advertisementService.updateEditDate(estate.getId());
+        }
         return "Success";
     }
 }

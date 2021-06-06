@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -38,12 +39,15 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
         advertisementPicture.setAdvertisement(advertisement);
         advertisementPicture.setPrimaryPic(false);
         advertisementPictureRepository.save(advertisementPicture);
+        advertisementService.updateEditDate(advertisement.getId());
         return "Success";
     }
 
     @Override
     public String delete(int id) {
+        Advertisement advertisement = advertisementPictureRepository.findById(id).getAdvertisement();
         advertisementPictureRepository.deleteById(id);
+        advertisementService.updateEditDate(advertisement.getId());
         return "Success";
     }
 
@@ -55,6 +59,7 @@ public class AdvertisementPictureServiceImpl implements AdvertisementPictureServ
             advertisementPicture.setPrimaryPic(advertisementPicture.getId() == id);
         }
         advertisementPictureRepository.saveAll(advertisementPictureList);
+        advertisementService.updateEditDate(advertisementId);
         return advertisementPictureRepository.findById(id);
     }
 

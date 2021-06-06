@@ -11,12 +11,12 @@ public interface NotificationService {
      * @param request <code>HttpServletRequest</code>
      * @return List of <code>NotificationDTO</code>
      */
-    List<NotificationDTO> getAllNotifications(HttpServletRequest request);
+    List<NotificationDTO> getAll(HttpServletRequest request);
 
     /**
      * Returns number of notifications not seen by logged <code>User</code>
      * @param request <code>HttpServletRequest</code>
      * @return <code>int</code> Number of messages not seen
      */
-    Integer getNumOfNotifications(HttpServletRequest request);
+    Integer getNum(HttpServletRequest request);
 }

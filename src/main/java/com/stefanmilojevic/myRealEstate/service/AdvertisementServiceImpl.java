@@ -73,6 +73,15 @@ public class AdvertisementServiceImpl implements AdvertisementService {
     }
 
     @Override
+    public Advertisement updateEditDate(Long id) {
+        Advertisement advertisement = advertisementRepository.findById(id).orElse(null);
+        assert advertisement != null;
+        advertisement.setEditedAt(new Timestamp(System.currentTimeMillis()));
+        advertisementRepository.saveAndFlush(advertisement);
+        return advertisement;
+    }
+
+    @Override
     public List<Advertisement> getAllByLogged(HttpServletRequest request) {
         User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
         return advertisementRepository.findAllByOwner(user);
@@ -131,6 +140,20 @@ public class AdvertisementServiceImpl implements AdvertisementService {
         advertisement.setCommentsCheckedAt(new Timestamp(System.currentTimeMillis()));
         advertisementRepository.save(advertisement);
         return "Success";
+    }
+
+    @Override
+    public List<Advertisement> getByFilter(SavedFilter savedFilter, User user) {
+        List<Advertisement> advertisementList;
+        if(savedFilter.getLastChecked() != null)
+            advertisementList =
+        advertisementRepository.findAllByPublishedAndCreatedAtAfterAndEstate_SubCategory_Category(true, savedFilter.getLastChecked(), savedFilter.getCategory());
+        else advertisementList = advertisementRepository.findAllByPublishedAndEstate_SubCategory_Category(true, savedFilter.getCategory());
+        advertisementList.removeIf(e ->
+                (savedFilter.getMaxPrice() != null && e.getPrice() > savedFilter.getMaxPrice())
+                        || (savedFilter.getMaxSize() != null && e.getEstate().getSize() > savedFilter.getMaxSize()) ||
+                        user.getId().equals(e.getOwner().getId()));
+        return advertisementList;
     }
 
 

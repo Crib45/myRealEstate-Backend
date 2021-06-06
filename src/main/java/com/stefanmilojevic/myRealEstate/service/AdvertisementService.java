@@ -2,6 +2,8 @@ package com.stefanmilojevic.myRealEstate.service;
 
 import com.stefanmilojevic.myRealEstate.dto.AdvertisementDTO;
 import com.stefanmilojevic.myRealEstate.model.Advertisement;
+import com.stefanmilojevic.myRealEstate.model.SavedFilter;
+import com.stefanmilojevic.myRealEstate.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -13,6 +15,13 @@ public interface AdvertisementService {
      * @return Saved Advertisement with generated id
      */
     Advertisement save(Advertisement advertisement, HttpServletRequest request);
+
+    /**
+     * Update edit date and save for advertisement by id
+     * @param id id of <code>Advertisement</code>
+     * @return saved advertisement
+     */
+    Advertisement updateEditDate(Long id);
 
     /**
      * Finds logged user by email from HttpServletRequest and returns all its advertisements
@@ -55,7 +64,19 @@ public interface AdvertisementService {
      */
     List<AdvertisementDTO> getAllPublishedDTOBySubCategoryId(int subcategoryId, HttpServletRequest request);
 
-    //TODO update CommentsCheckedAt date controller
-
+    /**
+     * Updates commentsCheckedAt date
+     * @param advertisement for updating <code>Advertisement</code>
+     * @return Success string
+     */
     String updateCommentsCheckedAt(Advertisement advertisement);
+
+    /**
+     * Returns all <code>Advertisement</code> made after last checked date on <code>SavedFilter</code>
+     * that are within filter range
+     * @param savedFilter <code>SavedFilter</code>
+     * @param user <code>User</code>
+     * @return List of <code>Advertisement</code>
+     */
+    List<Advertisement> getByFilter(SavedFilter savedFilter, User user);
 }

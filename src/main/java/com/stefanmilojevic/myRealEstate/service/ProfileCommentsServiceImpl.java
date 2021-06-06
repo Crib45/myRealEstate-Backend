@@ -41,4 +41,15 @@ public class ProfileCommentsServiceImpl implements ProfileCommentsService {
         profileCommentsRepository.save(profileComments);
         return profileCommentsRepository.findAllByMadeFor_Id(profileComments.getMadeFor().getId());
     }
+
+    @Override
+    public String updateSeen(HttpServletRequest request) {
+        User user = userService.getByEmail(UserUtil.getEmailFromRequest(request));
+        List<ProfileComments> profileCommentsList = profileCommentsRepository.findAllByMadeFor_Id(user.getId());
+        for (ProfileComments profileComments: profileCommentsList) {
+            profileComments.setSeen(true);
+        }
+        profileCommentsRepository.saveAll(profileCommentsList);
+        return "Success";
+    }
 }

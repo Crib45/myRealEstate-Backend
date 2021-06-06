@@ -29,4 +29,9 @@ public class ProfileCommentsController {
     public ResponseEntity<List<ProfileComments>> save(@RequestBody ProfileComments profileComments, HttpServletRequest request) {
         return ResponseEntity.ok(profileCommentsService.save(profileComments, request));
     }
+
+    @PutMapping("updateSeen")
+    public ResponseEntity<String> updateSeen(HttpServletRequest request) {
+        return ResponseEntity.ok(profileCommentsService.updateSeen(request));
+    }
 }
