@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {
         User user = userRepository.getByEmail(email);
-        user.setCity(cityService.getByUser(user));
+        if(user != null)
+            user.setCity(cityService.getByUser(user));
         return userRepository.getByEmail(email);
     }
 

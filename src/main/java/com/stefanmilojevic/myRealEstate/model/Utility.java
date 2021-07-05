@@ -39,8 +39,7 @@ public class Utility {
 
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "sub_category_id", referencedColumnName = "id")
+
     @ManyToMany(mappedBy = "utilities", fetch = FetchType.LAZY)
     public List<SubCategory> getSubCategory() {
         return subCategory;

@@ -19,11 +19,20 @@ public class CityController {
         this.cityService = cityService;
     }
 
+    /**
+     * Returns list of all available cities
+     * @return List of <code>City</code>
+     */
     @GetMapping()
     public ResponseEntity<List<City>> getAll() {
         return ResponseEntity.ok(cityService.getAll());
     }
 
+    /**
+     * Return <code>City</code> by id
+     * @param id id of <code>City</code>
+     * @return <code>City</code> object
+     */
     @GetMapping("/{id}")
     public ResponseEntity<City> getById(@PathVariable int id) {
         return ResponseEntity.ok(cityService.getById(id));
